@@ -24,8 +24,8 @@ __init_logging()
 
 if env not in supported_envs:
     raise EnvironmentError("Unsupported environment: " + env)
-module = importlib.import_module(f'configuration.{env}_config')
-class_name = f'{env}Config'
+module = importlib.import_module(f'configuration.{env}_configuration')
+class_name = f'{env}Configuration'
 
 class_attr = None
 for attr in dir(module):
