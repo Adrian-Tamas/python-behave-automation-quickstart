@@ -1,0 +1,11 @@
+/reports/*.xml
+/*.pydevproject
+/*.project
+/.settings/*.prefs
+/results.json
+/.idea
+/results.json
+**/__pycache__/*
+**/*.pyc
+.pytest_cache
+Pipfile**

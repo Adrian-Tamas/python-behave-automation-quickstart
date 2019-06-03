@@ -1,0 +1,28 @@
+{
+    "version": 1,
+    "disable_existing_loggers": false,
+    "formatters": {
+        "standard": {
+            "format": "%(asctime)s - %(module)s::%(funcName)s - [%(levelname)s] - %(message)s"
+        }
+    },
+    "handlers": {
+        "default": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "formatter": "standard"
+        }
+    },
+    "loggers": {
+        "default": {
+            "handlers": ["default"],
+            "level": "INFO",
+            "propagate": true
+        },
+        "reportportal_service": {
+            "handlers": ["default"],
+            "level": "INFO",
+            "propagate": true
+        }
+    }
+}
