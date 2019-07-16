@@ -8,7 +8,7 @@ from configuration.configuration import rp_endpoint, rp_project
 def before_all(context):
     rp_enable = context.config.userdata.getbool('rp_enable', False)
     step_based = context.config.userdata.getbool('step_based', False)
-    rp_token = os.environ["RP_TOKEN"]
+    rp_token = os.environ.get("RP_TOKEN")
     add_screenshot = context.config.userdata.getbool('add_screenshot', False)
     launch_name = f"Execution using tags: {context.config.tags.ands[0]}"
     launch_description = f"BDD Tests for: {', '.join(tag for tag in context.config.tags.ands[0])}"
