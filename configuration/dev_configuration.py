@@ -8,9 +8,9 @@ class DevConfiguration:
         self.configuration = configparser.ConfigParser(allow_no_value=True)
         self.configuration.read("dev_configuration.ini")
         self.backend_url = self.configuration[self.ENV_NAME]["backend_url"]
+        self.frontend_url = self.configuration[self.ENV_NAME]["frontend_url"]
         self.rp_endpoint = self.configuration[self.ENV_NAME]["rp_endpoint"]
         self.rp_project = self.configuration[self.ENV_NAME]["rp_project"]
-        self.frontend_url = self.configuration[self.ENV_NAME]["frontend_url"]
         self.max_timeout = int(self.configuration[self.ENV_NAME]["max_timeout"])
 
     def read_configuration(self):

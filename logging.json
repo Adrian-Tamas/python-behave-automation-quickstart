@@ -19,7 +19,7 @@
             "level": "INFO",
             "propagate": true
         },
-        "reportportal_service": {
+        "python-behave-automation-quickstart": {
             "handlers": ["default"],
             "level": "INFO",
             "propagate": true

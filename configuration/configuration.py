@@ -1,4 +1,3 @@
-# Load configuration file based on the selected platform
 import importlib
 import json
 import logging.config
@@ -7,6 +6,7 @@ import os
 env = os.environ.get("env", "dev")
 
 supported_envs = ["dev", "test"]
+
 
 def __init_logging():
     path = 'logging.json'
@@ -19,7 +19,6 @@ def __init_logging():
 
 
 __init_logging()
-
 
 if env not in supported_envs:
     raise EnvironmentError("Unsupported environment: " + env)
