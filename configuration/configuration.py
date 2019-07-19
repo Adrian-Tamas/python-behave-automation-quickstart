@@ -35,6 +35,7 @@ configuration = getattr(module, class_attr)()
 
 configuration.read_configuration()
 
+local = configuration.local
 backend_url = configuration.backend_url
 frontend_url = configuration.frontend_url
 rp_endpoint = configuration.rp_endpoint

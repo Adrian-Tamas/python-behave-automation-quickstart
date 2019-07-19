@@ -2,22 +2,22 @@ from assertpy import assert_that
 from behave import given, when, then
 
 from actions.api.user_endpoint_actions import do_post_request_to_create_user
-from models.endpoints.users_model import get_valid_create_user_payload, get_add_user_payload_without_parameter
+from models.users_model import get_valid_create_user_payload, get_add_user_payload_without_parameter
 
 
 # GIVENs
-@given('I have a correct User configuration')
-def given_i_have_a_correct_user_configuration(context):
+@given('I have a correct User payload')
+def given_i_have_a_correct_user_payload(context):
     context.request_body = get_valid_create_user_payload()
 
 
-@given('I have an User configuration without {param}')
-def given_i_have_an_user_configuration_without_param(context, param):
+@given('I have an User payload without {param}')
+def given_i_have_an_user_payload_without_param(context, param):
     context.request_body = get_add_user_payload_without_parameter(param=param)
 
 
-@given('I have an User configuration with invalid email format')
-def given_i_have_an_user_configuration_with_invalid_email_format(context):
+@given('I have an User payload with invalid email format')
+def given_i_have_an_user_payload_with_invalid_email_format(context):
     context.request_body = get_valid_create_user_payload()
     context.request_body['email'] = context.request_body['email'].replace('@', '')
 
@@ -44,8 +44,9 @@ def then_the_request_will_be_successful_with_200_response_code(context):
 
 @then('the response will contain the new object with the related ID')
 def then_the_response_will_contain_the_new_object_with_the_related_id(context):
-    assert_that(context.response.json()).is_equal_to(context.request_body, ignore="id")
-    assert_that(context.response.json()['id']).is_type_of(str).is_length(36)
+    json = context.response.json()
+    assert_that(json).is_equal_to(context.request_body, ignore="id")
+    assert_that(json['id']).is_type_of(str).is_length(36)
 
 
 @then('I receive an error that the email address already exists')

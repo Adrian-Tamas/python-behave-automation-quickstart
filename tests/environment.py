@@ -4,7 +4,6 @@ from elementium.drivers.se import SeElements
 from reportportal_behave.behave_integration_service import BehaveIntegrationService
 
 from configuration.configuration import rp_endpoint, rp_project
-
 from helpers.driver_helper import get_driver
 
 

@@ -12,6 +12,7 @@ class TestConfiguration:
         self.rp_project = self.configuration[self.ENV_NAME]["rp_project"]
         self.frontend_url = self.configuration[self.ENV_NAME]["frontend_url"]
         self.max_timeout = int(self.configuration[self.ENV_NAME]["max_timeout"])
+        self.local = self.configuration[self.ENV_NAME]["local"]
 
     def read_configuration(self):
         pass

@@ -22,7 +22,7 @@ def when_i_do_a_delete_request_to_the_user_endpoint_with_that_id(context):
 
 
 # THENs
-@then('I deleted successfully the user from database')
-def then_i_deleted_successfully_the_user_from_database(context):
+@then('I successfully deleted the user')
+def then_i_successfully_deleted_the_user(context):
     assert_that(context.response.status_code).is_equal_to(200)
     assert_that(context.response.json()).is_equal_to(f'Successfully deleted user {context.user_id}')

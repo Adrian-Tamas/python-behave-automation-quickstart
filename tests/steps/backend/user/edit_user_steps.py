@@ -3,8 +3,9 @@ from behave import given, when, then
 from faker import Faker
 
 from actions.api.user_endpoint_actions import do_put_request_to_update_user
+from configuration.configuration import local
 
-fake = Faker()
+fake = Faker(local)
 
 
 # GIVENs
@@ -25,15 +26,16 @@ def given_i_want_to_assign_a_new_email_address_to_that_user(context):
 @when('I do a PUT request to the user endpoint')
 def when_i_do_a_put_request_to_the_user_endpoint(context):
     context.user_id = context.response.json()['id']
-    context.response = do_put_request_to_update_user(user_id=context.user_id, data=context.request_body)
+    context.response = do_put_request_to_update_user(user_id=context.user_id, user=context.request_body)
 
 
 # THENs
 @then('the response is with success and the updated user details are displayed')
 def then_the_response_is_with_success_and_the_updated_user_details_are_displayed(context):
+    json = context.response.json()
     assert_that(context.response.status_code).is_equal_to(200)
-    assert_that(context.response.json()).is_equal_to(context.request_body, ignore='id')
-    assert_that(context.response.json()['id']).is_equal_to(context.user_id)
+    assert_that(json).is_equal_to(context.request_body, ignore='id')
+    assert_that(json['id']).is_equal_to(context.user_id)
 
 
 @then('I receive the error that the email address is invalid and the user details will not be updated')

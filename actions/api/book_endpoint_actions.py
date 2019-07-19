@@ -4,19 +4,19 @@ import requests
 
 from configuration.configuration import books_url
 
-logger = logging.getLogger('python-behave-automation-quickstart')
+logger = logging.getLogger('default')
 
 
 # POST
-def do_post_request_to_create_book(data):
+def do_post_request_to_create_book(book):
     """
     Do a post request to create a book
-    :param data: the details of the new book
+    :param book: the details of the new book
     :return: the full response object
     """
     url = books_url
     logger.debug(f'Doing a POST request to the endpoint: {url}')
-    response = requests.post(url=url, data=json.dumps(data))
+    response = requests.post(url=url, data=json.dumps(book))
     logger.debug(f'Got response: {response.json()}' if response.ok
                  else f'Status code was {response.status_code} because {response.reason}')
     return response
@@ -66,16 +66,16 @@ def do_delete_request_for_book(book_id):
 
 
 # PUT
-def do_put_request_to_update_book(book_id, data):
+def do_put_request_to_update_book(book_id, book):
     """
     Do a put request to update details for a book
     :param book_id: the ID of the book
-    :param data: the details to update
+    :param book: the details to update
     :return: the book object with updated details
     """
     url = f'{books_url}/{book_id}'
     logger.debug(f'Doing a PUT request to the endpoint: {url}')
-    response = requests.put(url=url, data=json.dumps(data))
+    response = requests.put(url=url, data=json.dumps(book))
     logger.debug(f'Got response: {response.json()}' if response.ok
                  else f'Status code was {response.status_code} because {response.reason}')
     return response

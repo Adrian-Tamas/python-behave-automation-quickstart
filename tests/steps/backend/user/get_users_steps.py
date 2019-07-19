@@ -4,14 +4,14 @@ from assertpy import assert_that
 from behave import given, when, then
 
 from actions.api.user_endpoint_actions import do_get_request_for_all_users, do_get_request_for_user
-from tests.steps.backend.user.create_user_steps import (given_i_have_a_correct_user_configuration,
+from tests.steps.backend.user.create_user_steps import (given_i_have_a_correct_user_payload,
                                                         when_i_do_a_post_request_to_the_user_endpoint)
 
 
 # GIVENs
-@given('I have at least one user added into database')
-def given_i_have_at_least_one_user_added_into_database(context):
-    given_i_have_a_correct_user_configuration(context)
+@given('I already have at least one user')
+def given_i_already_have_at_least_one_user(context):
+    given_i_have_a_correct_user_payload(context)
     when_i_do_a_post_request_to_the_user_endpoint(context)
 
 
@@ -21,9 +21,9 @@ def given_i_get_the_number_of_existing_users(context):
     context.number_of_users_before = len(all_users_response.json())
 
 
-@given('I have a new user added into database')
-def given_i_have_a_new_user_added_into_database(context):
-    given_i_have_a_correct_user_configuration(context)
+@given('I already have a new user')
+def given_i_already_have_a_new_user(context):
+    given_i_have_a_correct_user_payload(context)
     when_i_do_a_post_request_to_the_user_endpoint(context)
 
 
@@ -67,11 +67,12 @@ def then_in_the_end_the_list_of_users_is_larger_with_one_item(context):
     assert_that(context.number_of_users_after).is_equal_to(context.number_of_users_before + 1)
 
 
-@then('the related user configuration is successfully displayed')
-def then_the_related_user_configuration_is_successfully_displayed(context):
+@then('the related user payload is successfully displayed')
+def then_the_related_user_payload_is_successfully_displayed(context):
+    json = context.response.json()
     assert_that(context.response.status_code).is_equal_to(200)
-    assert_that(context.response.json()['id']).is_equal_to(context.valid_user_id)
-    assert_that(context.response.json()).is_equal_to(context.request_body, ignore='id')
+    assert_that(json['id']).is_equal_to(context.valid_user_id)
+    assert_that(json).is_equal_to(context.request_body, ignore='id')
 
 
 @then('I receive an error that the user was not found')

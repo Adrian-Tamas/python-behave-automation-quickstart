@@ -6,9 +6,10 @@ from behave import given, when, then
 from faker import Faker
 
 from actions.api.reservation_endpoint_actions import do_put_request_to_update_reservation
+from configuration.configuration import local
 
-fake = Faker()
-logger = logging.getLogger('python-behave-automation-quickstart')
+fake = Faker(local)
+logger = logging.getLogger('default')
 
 
 # GIVENs
@@ -30,17 +31,17 @@ def given_i_want_to_change_the_reservation_dates_using_not_existing_user_id(cont
 def when_i_do_a_put_request_to_the_reservation_endpoint(context):
     context.response = do_put_request_to_update_reservation(user_id=context.user_id,
                                                             book_id=context.book_id,
-                                                            data=context.request_body)
+                                                            reservation=context.request_body)
     logger.debug(f'response after EDIT: {context.response.content}')
 
 
 # THENs
 @then('the response is with success and the updated reservation details are displayed')
 def then_the_response_is_with_success_and_the_updated_reservation_details_are_displayed(context):
+    json = context.response.json()
     assert_that(context.response.status_code).is_equal_to(200)
-    assert_that(context.response.json()['reservation_date']).is_equal_to(context.request_body['reservation_date'])
-    assert_that(context.response.json()['reservation_expiration_date']).is_equal_to(
-        context.request_body['reservation_expiration_date'])
+    assert_that(json['reservation_date']).is_equal_to(context.request_body['reservation_date'])
+    assert_that(json['reservation_expiration_date']).is_equal_to(context.request_body['reservation_expiration_date'])
 
 
 @then('I get an error that the reservation that I want to edit is invalid')

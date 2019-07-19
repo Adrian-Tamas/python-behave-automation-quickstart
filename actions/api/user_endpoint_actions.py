@@ -4,19 +4,19 @@ import requests
 
 from configuration.configuration import users_url
 
-logger = logging.getLogger('python-behave-automation-quickstart')
+logger = logging.getLogger('default')
 
 
 # POST
-def do_post_request_to_create_user(data):
+def do_post_request_to_create_user(user):
     """
     Do a post request to add an user
-    :param data: the new user details
+    :param user: the new user details
     :return: the full response object
     """
     url = users_url
     logger.debug(f'Doing a POST request to the endpoint: {url}')
-    response = requests.post(url=url, data=json.dumps(data))
+    response = requests.post(url=url, data=json.dumps(user))
     logger.debug(f'Got response: {response.json()}' if response.ok
                  else f'Status code was {response.status_code} because: {response.reason}')
     return response
@@ -66,16 +66,16 @@ def do_delete_request_for_user(user_id):
 
 
 # PUT
-def do_put_request_to_update_user(user_id, data):
+def do_put_request_to_update_user(user_id, user):
     """
     Do a update request for one user
     :param user_id: the ID of the user
-    :param data: the updated user details
+    :param user: the updated user details
     :return: the user object with updated details
     """
     url = f'{users_url}/{user_id}'
     logger.debug(f'Doing a PUT request to the USERS endpoint: {url}')
-    response = requests.put(url=url, data=json.dumps(data))
+    response = requests.put(url=url, data=json.dumps(user))
     logger.debug(f'Got response: {response.json()}' if response.ok
                  else f'Status code was {response.status_code} because: {response.reason}')
     return response
