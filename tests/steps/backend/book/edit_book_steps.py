@@ -34,5 +34,5 @@ def when_i_try_to_update_book_with_the_same_details(context):
 def then_the_response_is_with_success_and_the_updated_book_details_are_displayed(context):
     json = context.response.json()
     assert_that(context.response.status_code).is_equal_to(200)
-    assert_that(json).is_equal_to(context.request_body, ignore='id')
+    assert_that(json).is_equal_to(context.request_body, ignore=['id', 'description', 'cover'])
     assert_that(json['id']).is_equal_to(context.book_id)

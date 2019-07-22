@@ -26,3 +26,4 @@ def when_i_do_a_delete_request_to_the_book_endpoint_with_that_id(context):
 def then_i_deleted_successfully_the_book_from_books_list(context):
     assert_that(context.response.status_code).is_equal_to(200)
     assert_that(context.response.json()).is_equal_to(f'Book with id {context.book_id} has been deleted')
+    context.book_ids.remove(context.book_id)

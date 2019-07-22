@@ -45,7 +45,7 @@ def then_the_request_will_be_successful_with_200_response_code(context):
 @then('the response will contain the new object with the related ID')
 def then_the_response_will_contain_the_new_object_with_the_related_id(context):
     json = context.response.json()
-    assert_that(json).is_equal_to(context.request_body, ignore="id")
+    assert_that(json).is_equal_to(context.request_body, ignore=["id", "description", "cover"])
     assert_that(json['id']).is_type_of(str).is_length(36)
 
 

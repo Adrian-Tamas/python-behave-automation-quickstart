@@ -8,12 +8,14 @@ from actions.api.reservation_endpoint_actions import (do_delete_reservation_by_b
 from tests.steps.backend.user.get_users_steps import given_i_add_a_new_user
 
 
+# GIVENs
 @given('I already added a user')
 def given_i_already_added_a_user(context):
     given_i_add_a_new_user(context)
     context.user_id = context.response.json()['id']
 
 
+# WHENs
 @when('I do a delete request for reservation using {entity} id')
 def when_i_do_a_delete_request_for_reservation_using_param_id(context, entity):
     context.entity = entity
@@ -33,6 +35,7 @@ def when_i_do_a_delete_request_for_reservation_using_wrong_user_id(context):
     context.response = do_delete_reservation_by_book_id_and_user_id(user_id=context.user_id, book_id=context.book_id)
 
 
+# THENs
 @then('I successfully deleted the reservation')
 def then_i_deleted_successfully_the_reservation(context):
     assert_that(context.response.status_code).is_equal_to(200)

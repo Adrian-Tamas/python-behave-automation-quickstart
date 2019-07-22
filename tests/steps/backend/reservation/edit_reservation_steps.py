@@ -1,4 +1,3 @@
-import logging
 import uuid
 
 from assertpy import assert_that
@@ -9,7 +8,6 @@ from actions.api.reservation_endpoint_actions import do_put_request_to_update_re
 from configuration.configuration import local
 
 fake = Faker(local)
-logger = logging.getLogger('default')
 
 
 # GIVENs
@@ -17,7 +15,6 @@ logger = logging.getLogger('default')
 def given_i_want_to_change_the_reservation_dates(context):
     context.request_body['reservation_date'] = fake.date(pattern="%Y-%m-%d", end_datetime=None)
     context.request_body['reservation_expiration_date'] = fake.date(pattern="%Y-%m-%d", end_datetime=None)
-    logger.debug(f'Request body: {context.request_body}')
 
 
 @given('I want to change the reservation dates using not existing {param}')
@@ -32,7 +29,6 @@ def when_i_do_a_put_request_to_the_reservation_endpoint(context):
     context.response = do_put_request_to_update_reservation(user_id=context.user_id,
                                                             book_id=context.book_id,
                                                             reservation=context.request_body)
-    logger.debug(f'response after EDIT: {context.response.content}')
 
 
 # THENs

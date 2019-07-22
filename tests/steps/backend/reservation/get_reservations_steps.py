@@ -1,5 +1,3 @@
-import logging
-
 from assertpy import assert_that
 from behave import given, when, then
 
@@ -7,12 +5,10 @@ from actions.api.reservation_endpoint_actions import (do_get_request_for_all_res
                                                       do_get_reservation_by_entity_id,
                                                       do_get_reservation_by_book_id_and_user_id)
 from models.reservations_model import get_valid_create_reservation_payload
-from tests.steps.backend.book.create_book_steps import given_i_already_have_a_book
+from tests.steps.backend.book.create_book_steps import given_i_already_have_a_book_with_minimum_required_parameters
 from tests.steps.backend.reservation.create_reservation_steps import (given_i_already_have_an_user_and_a_book,
                                                                       given_i_have_a_valid_payload_to_create_a_reservation,
                                                                       when_i_do_a_post_request_to_the_reservation_endpoint)
-
-logger = logging.getLogger('dafault')
 
 
 # GIVENs
@@ -25,7 +21,7 @@ def given_i_already_have_at_least_one_reservation(context):
 
 @given('I add a new reservation for the same user')
 def given_i_add_a_new_reservation_for_the_same_user(context):
-    given_i_already_have_a_book(context)
+    given_i_already_have_a_book_with_minimum_required_parameters(context)
     context.second_book_id = context.response.json()['id']
     context.second_book = context.response.json()
     context.request_body = get_valid_create_reservation_payload(book_id=context.second_book_id, user_id=context.user_id)
