@@ -72,5 +72,4 @@ def then_the_related_book_payload_is_successfully_displayed(context):
 @then('I receive an error that the book was not found')
 def then_i_receive_an_error_that_the_book_was_not_found(context):
     assert_that(context.response.status_code).is_equal_to(400)
-    assert_that(context.response.json()).is_equal_to(f'Book with id = {context.not_existing_book_id} '
-                                                     f'was not found')
+    assert_that(context.response.json()).is_equal_to(f'Book with id = {context.not_existing_book_id} was not found')

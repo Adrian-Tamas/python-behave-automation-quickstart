@@ -11,7 +11,7 @@ Feature: Create users
     And the response will contain the new object with the related ID
 
   Scenario: I cannot add several users with the same email
-    Given I already have a new user
+    Given I add a new user
     When I try to add another user with the same email address
     Then I receive an error that the email address already exists
 

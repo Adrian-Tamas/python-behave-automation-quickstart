@@ -21,8 +21,8 @@ def given_i_get_the_number_of_existing_users(context):
     context.number_of_users_before = len(all_users_response.json())
 
 
-@given('I already have a new user')
-def given_i_already_have_a_new_user(context):
+@given('I add a new user')
+def given_i_add_a_new_user(context):
     given_i_have_a_correct_user_payload(context)
     when_i_do_a_post_request_to_the_user_endpoint(context)
 

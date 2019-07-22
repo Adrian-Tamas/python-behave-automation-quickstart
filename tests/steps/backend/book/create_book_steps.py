@@ -1,5 +1,7 @@
+import logging
+
 from assertpy import assert_that
-from behave import given, when, then
+from behave import given, when, then, step
 
 from actions.api.book_endpoint_actions import do_post_request_to_create_book
 from models.books_model import get_valid_create_book_payload, get_add_book_payload_without_parameter
@@ -17,28 +19,34 @@ def given_i_already_have_a_book(context):
     when_i_do_a_post_request_to_the_book_endpoint(context)
 
 
-@given('I have a Book payload without {entity_name}')
-def given_i_have_a_book_payload_without_title(context, entity_name):
-    context.request_body = get_add_book_payload_without_parameter(entity=entity_name)
+@given('I have a Book payload without {param}')
+def given_i_have_a_book_payload_without_title(context, param):
+    context.request_body = get_add_book_payload_without_parameter(param=param)
 
 
 # WHENs
-@when('I do a POST request to the book endpoint')
+@step('I do a POST request to the book endpoint')
 def when_i_do_a_post_request_to_the_book_endpoint(context):
     context.response = do_post_request_to_create_book(context.request_body)
+    if context.response.status_code == 200:
+        book_id = context.response.json()['id']
+        context.book_ids.append(book_id)
+    else:
+        logging.debug(f"Create book failed. Status Code: {context.response.status_code} and the error was:"
+                      f" {context.response.text}")
 
 
-@when('I add a new book using the same {entity} as before')
-def when_i_add_another_book_using_the_same_author_but_different_title(context, entity):
-    same_entity = context.request_body[f'{entity}']
+@when('I add a new book using the same {param} as before')
+def when_i_add_another_book_using_the_same_author_but_different_title(context, param):
+    same_entity = context.request_body[param]
     context.request_body = get_valid_create_book_payload()
-    context.request_body[f'{entity}'] = same_entity
+    context.request_body[param] = same_entity
     when_i_do_a_post_request_to_the_book_endpoint(context)
 
 
 @when('I try to add another book with the same details')
 def when_i_try_to_add_another_book_with_the_same_details(context):
-    context.response = do_post_request_to_create_book(context.request_body)
+    when_i_do_a_post_request_to_the_book_endpoint(context)
 
 
 # THENs

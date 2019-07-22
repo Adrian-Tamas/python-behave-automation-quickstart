@@ -4,7 +4,7 @@ from assertpy import assert_that
 from behave import given, when, then
 
 from actions.api.reservation_endpoint_actions import (do_get_request_for_all_reservations,
-                                                      do_get_reservation_by_book_id_or_user_id,
+                                                      do_get_reservation_by_entity_id,
                                                       do_get_reservation_by_book_id_and_user_id)
 from models.reservations_model import get_valid_create_reservation_payload
 from tests.steps.backend.book.create_book_steps import given_i_already_have_a_book
@@ -42,7 +42,7 @@ def when_i_do_a_get_all_reservations_request(context):
 def when_i_do_a_get_request_for_one_reservation_using_book_id(context, entity):
     context.response_after_reservation_created = context.response.json()
     entity_id = getattr(context, f'{entity}_id')
-    context.response = do_get_reservation_by_book_id_or_user_id(entity_name=entity, entity_id=entity_id)
+    context.response = do_get_reservation_by_entity_id(entity=entity, id=entity_id)
 
 
 @when('I do the get request for reservation using user_id and book id')

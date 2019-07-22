@@ -24,7 +24,7 @@ def get_valid_create_book_payload():
     return request_body
 
 
-def get_add_book_payload_without_parameter(entity):
+def get_add_book_payload_without_parameter(param):
     request_body = dict(_setup_create_book()._asdict())
-    del request_body[entity]
+    del request_body[param]
     return request_body

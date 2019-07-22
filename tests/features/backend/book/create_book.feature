@@ -12,15 +12,15 @@ Feature: Create books
 
   Scenario: I can add a new book using existing author, but different title
     Given I have a correct book payload
-    When I do a POST request to the book endpoint
-    And I add a new book using the same author as before
+    And I do a POST request to the book endpoint
+    When I add a new book using the same author as before
     Then the request will be successful with 200 response code
     And the response will contain the new object with the related ID
 
   Scenario: I can add a new book using existing title, but different author
     Given I have a correct book payload
-    When I do a POST request to the book endpoint
-    And I add a new book using the same name as before
+    And I do a POST request to the book endpoint
+    When I add a new book using the same name as before
     Then the request will be successful with 200 response code
     And the response will contain the new object with the related ID
 
