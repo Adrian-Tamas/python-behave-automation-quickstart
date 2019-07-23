@@ -59,7 +59,7 @@ def when_i_do_a_get_request_for_one_user_with_that_user_id(context):
 @then('I should receive a 200 response code and an item has the correct attributes')
 def then_i_should_receive_a_200_response_code_and_an_item_has_the_correct_attributes(context):
     assert_that(context.all_users_response.status_code).is_equal_to(200)
-    assert_that(context.all_users_response.json()[0]).contains('id', 'first_name', 'last_name', 'email')
+    assert_that(context.all_users_response.json()[0].keys()).contains('id', 'first_name', 'last_name', 'email')
 
 
 @then('in the end the list of users is larger with one item')
@@ -69,10 +69,14 @@ def then_in_the_end_the_list_of_users_is_larger_with_one_item(context):
 
 @then('the related user payload is successfully displayed')
 def then_the_related_user_payload_is_successfully_displayed(context):
-    json = context.response.json()
+    user = context.response.json()
+    request = context.request_body
     assert_that(context.response.status_code).is_equal_to(200)
-    assert_that(json['id']).is_equal_to(context.valid_user_id)
-    assert_that(json).is_equal_to(context.request_body, ignore='id')
+    assert_that(user)\
+        .has_id(context.valid_user_id)\
+        .has_first_name(request['first_name'])\
+        .has_last_name(request['last_name'])\
+        .has_email(request['email'])
 
 
 @then('I receive an error that the user was not found')

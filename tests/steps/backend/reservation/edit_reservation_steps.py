@@ -34,10 +34,11 @@ def when_i_do_a_put_request_to_the_reservation_endpoint(context):
 # THENs
 @then('the response is with success and the updated reservation details are displayed')
 def then_the_response_is_with_success_and_the_updated_reservation_details_are_displayed(context):
-    json = context.response.json()
+    reservation = context.response.json()
     assert_that(context.response.status_code).is_equal_to(200)
-    assert_that(json['reservation_date']).is_equal_to(context.request_body['reservation_date'])
-    assert_that(json['reservation_expiration_date']).is_equal_to(context.request_body['reservation_expiration_date'])
+    assert_that(reservation)\
+        .has_reservation_date(context.request_body['reservation_date'])\
+        .has_reservation_expiration_date(context.request_body['reservation_expiration_date'])
 
 
 @then('I get an error that the reservation that I want to edit is invalid')

@@ -39,12 +39,19 @@ def do_get_request_for_all_reservations():
 def do_get_reservation_by_entity_id(**kwargs):
     """
     Do a get request to obtain reservation using book_id OR user_id
+    **kwargs: receive user_id or book_id as parameter
     :return: the reservation details
     """
-    param_id = kwargs.get('id')
-    param = kwargs.get('entity')
-    url = f'{reservations_url}/{param}/{param_id}'
+    if "book_id" in kwargs:
+        url = f'{reservations_url}/book/{kwargs.get("book_id")}'
+    elif "user_id" in kwargs:
+        url = f'{reservations_url}/user/{kwargs.get("user_id")}'
+    else:
+        raise NotImplementedError
+    logger.debug(f'Doing a GET request to the endpoint: {url}')
     response = requests.get(url=url)
+    logger.debug(f'Got response: {response.json()}' if response.ok
+                 else f'Status code was {response.status_code} because {response.reason}')
     return response
 
 
@@ -67,12 +74,19 @@ def do_get_reservation_by_book_id_and_user_id(user_id, book_id):
 def do_delete_reservation_by_book_id_or_user_id(**kwargs):
     """
     Do a delete request to remove reservation using book_id OR user_id
+    **kwargs: receive user_id or book_id as parameter
     :return: the message after reservation is deleted
     """
-    param_id = kwargs.get('id')
-    param = kwargs.get('entity')
-    url = f'{reservations_url}/{param}/{param_id}'
+    if "book_id" in kwargs:
+        url = f'{reservations_url}/book/{kwargs.get("book_id")}'
+    elif "user_id" in kwargs:
+        url = f'{reservations_url}/user/{kwargs.get("user_id")}'
+    else:
+        raise NotImplementedError
+    logger.debug(f'Doing a DELETE request to the endpoint: {url}')
     response = requests.delete(url=url)
+    logger.debug(f'Got response: {response.json()}' if response.ok
+                 else f'Status code was {response.status_code} because {response.reason}')
     return response
 
 

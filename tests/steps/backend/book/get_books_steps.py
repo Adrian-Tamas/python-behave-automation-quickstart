@@ -63,10 +63,10 @@ def then_in_the_end_the_list_of_books_is_larger_with_one_item(context):
 
 @then('the related book payload is successfully displayed')
 def then_the_related_book_payload_is_successfully_displayed(context):
-    json = context.response.json()
+    book = context.response.json()
     assert_that(context.response.status_code).is_equal_to(200)
-    assert_that(json['id']).is_equal_to(context.valid_book_id)
-    assert_that(json).is_equal_to(context.request_body, ignore=['id', 'description', 'cover'])
+    assert_that(book['id']).is_equal_to(context.valid_book_id)
+    assert_that(book).is_equal_to(context.request_body, ignore=['id', 'description', 'cover'])
 
 
 @then('I receive an error that the book was not found')

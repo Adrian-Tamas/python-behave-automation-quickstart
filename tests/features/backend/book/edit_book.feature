@@ -14,4 +14,3 @@ Feature: Edit book details
     Given I already have a book added with minimum required parameters
     When I try to update book with the same details
     Then the response is with success and the updated book details are displayed
-

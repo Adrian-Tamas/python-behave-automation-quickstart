@@ -1,8 +1,12 @@
+import logging
+
 from assertpy import assert_that
 from behave import given, when, then
 
 from actions.api.user_endpoint_actions import do_post_request_to_create_user
 from models.users_model import get_valid_create_user_payload, get_add_user_payload_without_parameter
+
+logger = logging.getLogger('default')
 
 
 # GIVENs
@@ -19,13 +23,18 @@ def given_i_have_an_user_payload_without_param(context, param):
 @given('I have an User payload with invalid email format')
 def given_i_have_an_user_payload_with_invalid_email_format(context):
     context.request_body = get_valid_create_user_payload()
-    context.request_body['email'] = context.request_body['email'].replace('@', '')
+    context.request_body['email'] = 'abc'
 
 
 # WHENs
 @when('I do a POST request to the user endpoint')
 def when_i_do_a_post_request_to_the_user_endpoint(context):
     context.response = do_post_request_to_create_user(context.request_body)
+    if context.response.status_code == 200:
+        context.user_ids.append(context.response.json()['id'])
+    else:
+        logger.debug(f"Create user failed. Status Code: {context.response.status_code} and the error was:"
+                     f" {context.response.text}")
 
 
 @when('I try to add another user with the same email address')
@@ -44,9 +53,7 @@ def then_the_request_will_be_successful_with_200_response_code(context):
 
 @then('the response will contain the new object with the related ID')
 def then_the_response_will_contain_the_new_object_with_the_related_id(context):
-    json = context.response.json()
-    assert_that(json).is_equal_to(context.request_body, ignore=["id", "description", "cover"])
-    assert_that(json['id']).is_type_of(str).is_length(36)
+    assert_that(context.response.json()).is_equal_to(context.request_body, ignore="id")
 
 
 @then('I receive an error that the email address already exists')

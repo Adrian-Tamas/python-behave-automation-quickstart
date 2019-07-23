@@ -34,11 +34,18 @@ def when_i_do_a_get_all_reservations_request(context):
     context.response = do_get_request_for_all_reservations()
 
 
-@when('I do a get request for reservation using {entity} id')
-def when_i_do_a_get_request_for_one_reservation_using_book_id(context, entity):
+@when('I do a get request for reservation using book id')
+def when_i_do_a_get_request_for_one_reservation_using_book_id(context):
     context.response_after_reservation_created = context.response.json()
-    entity_id = getattr(context, f'{entity}_id')
-    context.response = do_get_reservation_by_entity_id(entity=entity, id=entity_id)
+    book_id = getattr(context, 'book_id')
+    context.response = do_get_reservation_by_entity_id(book_id=book_id)
+
+
+@when('I do a get request for reservation using user id')
+def when_i_do_a_get_request_for_one_reservation_using_user_id(context):
+    context.response_after_reservation_created = context.response.json()
+    user_id = getattr(context, 'user_id')
+    context.response = do_get_reservation_by_entity_id(user_id=user_id)
 
 
 @when('I do the get request for reservation using user_id and book id')
@@ -50,27 +57,25 @@ def when_i_do_the_get_request_for_reservation_using_user_id_and_book_id(context)
 # THENs
 @then('I should receive a 200 response code and a reservation has the correct attributes')
 def then_i_should_receive_a_200_response_code_and_a_reservation_has_the_correct_attributes(context):
-    json = context.response.json()
+    reservation_list = context.response.json()
     assert_that(context.response.status_code).is_equal_to(200)
-    assert_that(json).is_type_of(list)
-    assert_that(json[0]).contains('user', 'book', 'reservation_date', 'reservation_expiration_date')
+    assert_that(reservation_list).is_type_of(list)
+    assert_that(reservation_list[0]).contains('user', 'book', 'reservation_date', 'reservation_expiration_date')
 
 
 @then('I get the correct details of that reservation')
 def then_i_get_the_correct_details_of_that_reservation(context):
-    json = context.response.json()
+    reservation_response = context.response.json()
     assert_that(context.response.status_code).is_equal_to(200)
-    if type(json) == list:
-        assert_that(json[0]).is_equal_to(context.response_after_reservation_created)
+    if type(reservation_response) == list:
+        assert_that(reservation_response[0]).is_equal_to(context.response_after_reservation_created)
     else:
-        assert_that(json).is_equal_to(context.response_after_reservation_created)
+        assert_that(reservation_response).is_equal_to(context.response_after_reservation_created)
 
 
 @then('I get the details of all reservations that a user has')
 def then_i_get_the_details_of_all_reservations_that_a_user_has(context):
-    json = context.response.json()
+    reservation1, reservation2 = context.response.json()
     assert_that(context.response.status_code).is_equal_to(200)
-    assert_that(json[0]['user']).is_equal_to(context.user)
-    assert_that(json[1]['user']).is_equal_to(context.user)
-    assert_that(json[0]['book']).is_equal_to(context.book)
-    assert_that(json[1]['book']).is_equal_to(context.second_book)
+    assert_that(reservation1).has_user(context.user).has_book(context.book)
+    assert_that(reservation2).has_user(context.user).has_book(context.second_book)

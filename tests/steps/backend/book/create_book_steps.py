@@ -8,6 +8,8 @@ from models.books_model import (get_valid_minim_required_create_book_payload,
                                 get_valid_with_all_params_create_book_payload,
                                 get_add_book_payload_without_parameter)
 
+logger = logging.getLogger('default')
+
 
 # GIVENs
 @given('I have a correct book payload with the minimum of required parameters')
@@ -42,11 +44,10 @@ def given_i_have_a_book_payload_without_title(context, param):
 def when_i_do_a_post_request_to_the_book_endpoint(context):
     context.response = do_post_request_to_create_book(context.request_body)
     if context.response.status_code == 200:
-        book_id = context.response.json()['id']
-        context.book_ids.append(book_id)
+        context.book_ids.append(context.response.json()['id'])
     else:
-        logging.debug(f"Create book failed. Status Code: {context.response.status_code} and the error was:"
-                      f" {context.response.text}")
+        logger.debug(f"Create book failed. Status Code: {context.response.status_code} and the error was:"
+                     f" {context.response.text}")
 
 
 @when('I add a new book using the same {param} as before')
@@ -72,6 +73,10 @@ def then_i_receive_an_error_that_the_book_with_that_name_already_exists(context)
 
 @then('the response will contain the new book with the related ID')
 def then_the_response_will_contain_the_new_book_with_the_related_id(context):
-    json = context.response.json()
-    assert_that(json).is_equal_to(context.request_body, ignore="id")
-    assert_that(json['id']).is_type_of(str).is_length(36)
+    book = context.response.json()
+    request = context.request_body
+    assert_that(book)\
+        .has_name(request['name'])\
+        .has_author(request['author'])\
+        .has_description(None)\
+        .has_cover(None)

@@ -32,7 +32,11 @@ def when_i_try_to_update_book_with_the_same_details(context):
 # THENs
 @then('the response is with success and the updated book details are displayed')
 def then_the_response_is_with_success_and_the_updated_book_details_are_displayed(context):
-    json = context.response.json()
+    book = context.response.json()
+    request = context.request_body
     assert_that(context.response.status_code).is_equal_to(200)
-    assert_that(json).is_equal_to(context.request_body, ignore=['id', 'description', 'cover'])
-    assert_that(json['id']).is_equal_to(context.book_id)
+    assert_that(book)\
+        .has_name(request['name'])\
+        .has_author(request['author'])\
+        .has_description(None)\
+        .has_cover(None)

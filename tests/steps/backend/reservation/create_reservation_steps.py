@@ -37,11 +37,12 @@ def when_i_try_to_create_another_reservation_with_the_same_details(context):
 # THENs
 @then('the response will contain the new reservation with the correct details')
 def then_the_response_will_contain_the_new_reservation_with_the_correct_details(context):
-    json = context.response.json()
-    assert_that(json['user']).is_equal_to(context.user)
-    assert_that(json['book']).is_equal_to(context.book)
-    assert_that(json['reservation_date']).is_equal_to(context.request_body['reservation_date'])
-    assert_that(json['reservation_expiration_date']).is_equal_to(context.request_body['reservation_expiration_date'])
+    reservation = context.response.json()
+    assert_that(reservation)\
+        .has_user(context.user)\
+        .has_book(context.book)\
+        .has_reservation_date(context.request_body['reservation_date'])\
+        .has_reservation_expiration_date(context.request_body['reservation_expiration_date'])
 
 
 @then('I get an error that the reservation already exists')
