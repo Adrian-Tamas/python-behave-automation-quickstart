@@ -9,3 +9,4 @@
 **/*.pyc
 .pytest_cache
 Pipfile**
+geckodriver.log

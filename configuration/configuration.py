@@ -38,5 +38,6 @@ configuration = getattr(module, class_attr)()
 configuration.read_configuration()
 
 backend_url = configuration.backend_url
+frontend_url = configuration.frontend_url
 rp_endpoint = configuration.rp_endpoint
 rp_project = configuration.rp_project
