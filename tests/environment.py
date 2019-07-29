@@ -78,10 +78,13 @@ def after_all(context):
         response = do_delete_request_for_book(book_id)
         if not response.ok:
             all_book_ids_deleted = False
-    assertpy.assert_that(all_book_ids_deleted).described_as("Not all books were deleted").is_true()
+            logger.debug('Not all books were deleted')
 
     for user_id in context.user_ids:
         response = do_delete_request_for_user(user_id)
         if not response.ok:
             all_user_ids_deleted = False
+            logger.debug("Not all users were deleted")
+
+    assertpy.assert_that(all_book_ids_deleted).described_as("Not all books were deleted").is_true()
     assertpy.assert_that(all_user_ids_deleted).described_as("Not all users were deleted").is_true()
