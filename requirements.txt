@@ -4,3 +4,4 @@ assertpy==0.14
 reportportal-behave-client==1.0.1
 elementium==2.0.0
 selenium==3.141.0
+faker

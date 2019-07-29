@@ -8,7 +8,6 @@ env = os.environ.get("env", "dev")
 
 supported_envs = ["dev", "test"]
 
-
 def __init_logging():
     path = 'logging.json'
     if os.path.exists(path):
@@ -41,3 +40,4 @@ backend_url = configuration.backend_url
 frontend_url = configuration.frontend_url
 rp_endpoint = configuration.rp_endpoint
 rp_project = configuration.rp_project
+max_timeout = configuration.max_timeout
