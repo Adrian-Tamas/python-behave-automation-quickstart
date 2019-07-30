@@ -3,7 +3,7 @@ from behave import given, when, then, step
 
 from actions.api.reservation_endpoint_actions import do_post_request_to_create_reservation
 from models.reservations_model import get_valid_create_reservation_payload
-from tests.steps.backend.book.create_book_steps import given_i_already_have_a_book_with_minimum_required_parameters
+from tests.steps.backend.book.create_book_steps import given_i_already_have_a_book_only_with_the_required_parameters
 from tests.steps.backend.user.get_users_steps import given_i_add_a_new_user
 
 
@@ -13,7 +13,7 @@ def given_i_already_have_an_user_and_a_book(context):
     given_i_add_a_new_user(context)
     context.user_id = context.response.json()['id']
     context.user = context.response.json()
-    given_i_already_have_a_book_with_minimum_required_parameters(context)
+    given_i_already_have_a_book_only_with_the_required_parameters(context)
     context.book_id = context.response.json()['id']
     context.book = context.response.json()
 
@@ -38,10 +38,10 @@ def when_i_try_to_create_another_reservation_with_the_same_details(context):
 @then('the response will contain the new reservation with the correct details')
 def then_the_response_will_contain_the_new_reservation_with_the_correct_details(context):
     reservation = context.response.json()
-    assert_that(reservation)\
-        .has_user(context.user)\
-        .has_book(context.book)\
-        .has_reservation_date(context.request_body['reservation_date'])\
+    assert_that(reservation) \
+        .has_user(context.user) \
+        .has_book(context.book) \
+        .has_reservation_date(context.request_body['reservation_date']) \
         .has_reservation_expiration_date(context.request_body['reservation_expiration_date'])
 
 

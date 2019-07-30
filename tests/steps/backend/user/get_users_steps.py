@@ -72,10 +72,10 @@ def then_the_related_user_payload_is_successfully_displayed(context):
     user = context.response.json()
     request = context.request_body
     assert_that(context.response.status_code).is_equal_to(200)
-    assert_that(user)\
-        .has_id(context.valid_user_id)\
-        .has_first_name(request['first_name'])\
-        .has_last_name(request['last_name'])\
+    assert_that(user) \
+        .has_id(context.valid_user_id) \
+        .has_first_name(request['first_name']) \
+        .has_last_name(request['last_name']) \
         .has_email(request['email'])
 
 

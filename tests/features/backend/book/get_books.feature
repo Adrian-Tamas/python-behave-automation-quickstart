@@ -11,12 +11,12 @@ Feature: View all books and by book id
 
   Scenario: I get the list of books incremented after each new book added
     Given I get the number of existing books
-    And I already have a book added with minimum required parameters
+    And I already have a book added only with the required parameters
     When I get the number of books
     Then in the end the list of books is larger with one item
 
-  Scenario: I can get the details of a book added with minimum required parameters
-    Given I already have a book added with minimum required parameters
+  Scenario: I can get the details of a book added only with the required parameters
+    Given I already have a book added only with the required parameters
     When I do a get request for one book with correct book_id
     Then the related book payload is successfully displayed
 

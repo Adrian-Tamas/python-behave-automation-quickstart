@@ -5,7 +5,7 @@
 Feature: Delete books
 
   Scenario: I can delete a book using a valid book_id
-    Given I already have a book added with minimum required parameters
+    Given I already have a book added only with the required parameters
     And I have the related book id
     When I do a DELETE request to the book endpoint
     Then I deleted successfully the book from books list

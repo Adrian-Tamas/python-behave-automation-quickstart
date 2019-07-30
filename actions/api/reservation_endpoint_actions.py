@@ -1,10 +1,8 @@
-import logging
 import requests
 import json
 
+from actions.api import logger
 from configuration.configuration import reservations_url
-
-logger = logging.getLogger('default')
 
 
 # POST

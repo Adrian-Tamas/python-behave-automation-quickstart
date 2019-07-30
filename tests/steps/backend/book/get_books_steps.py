@@ -4,14 +4,15 @@ from assertpy import assert_that
 from behave import given, when, then
 
 from actions.api.book_endpoint_actions import do_get_request_for_all_books, do_get_request_for_book
-from tests.steps.backend.book.create_book_steps import (given_i_have_a_correct_book_payload_with_the_minimum_of_required_parameters,
-                                                        when_i_do_a_post_request_to_the_book_endpoint)
+from tests.steps.backend.book.create_book_steps import (
+    given_i_have_a_correct_book_payload_only_with_the_required_parameters,
+    when_i_do_a_post_request_to_the_book_endpoint)
 
 
 # GIVENs
 @given('I already have at least one book')
 def given_i_already_have_at_least_one_book(context):
-    given_i_have_a_correct_book_payload_with_the_minimum_of_required_parameters(context)
+    given_i_have_a_correct_book_payload_only_with_the_required_parameters(context)
     when_i_do_a_post_request_to_the_book_endpoint(context)
 
 

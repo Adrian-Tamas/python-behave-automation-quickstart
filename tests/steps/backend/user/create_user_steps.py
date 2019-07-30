@@ -1,12 +1,9 @@
-import logging
-
 from assertpy import assert_that
 from behave import given, when, then
 
 from actions.api.user_endpoint_actions import do_post_request_to_create_user
 from models.users_model import get_valid_create_user_payload, get_add_user_payload_without_parameter
-
-logger = logging.getLogger('default')
+from tests.steps import logger
 
 
 # GIVENs

@@ -2,12 +2,9 @@ import uuid
 
 from assertpy import assert_that
 from behave import given, when, then
-from faker import Faker
 
 from actions.api.reservation_endpoint_actions import do_put_request_to_update_reservation
-from configuration.configuration import local
-
-fake = Faker(local)
+from tests.steps import fake
 
 
 # GIVENs
@@ -36,8 +33,8 @@ def when_i_do_a_put_request_to_the_reservation_endpoint(context):
 def then_the_response_is_with_success_and_the_updated_reservation_details_are_displayed(context):
     reservation = context.response.json()
     assert_that(context.response.status_code).is_equal_to(200)
-    assert_that(reservation)\
-        .has_reservation_date(context.request_body['reservation_date'])\
+    assert_that(reservation) \
+        .has_reservation_date(context.request_body['reservation_date']) \
         .has_reservation_expiration_date(context.request_body['reservation_expiration_date'])
 
 

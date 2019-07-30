@@ -1,5 +1,3 @@
-import logging
-
 from assertpy import assert_that
 from behave import given, when, then, step
 
@@ -7,13 +5,12 @@ from actions.api.book_endpoint_actions import do_post_request_to_create_book
 from models.books_model import (get_valid_minim_required_create_book_payload,
                                 get_valid_with_all_params_create_book_payload,
                                 get_add_book_payload_without_parameter)
-
-logger = logging.getLogger('default')
+from tests.steps import logger
 
 
 # GIVENs
-@given('I have a correct book payload with the minimum of required parameters')
-def given_i_have_a_correct_book_payload_with_the_minimum_of_required_parameters(context):
+@given('I have a correct book payload only with the required parameters')
+def given_i_have_a_correct_book_payload_only_with_the_required_parameters(context):
     context.request_body = get_valid_minim_required_create_book_payload()
 
 
@@ -22,9 +19,9 @@ def given_i_have_a_correct_book_payload_with_all_the_parameters(context):
     context.request_body = get_valid_with_all_params_create_book_payload()
 
 
-@given('I already have a book added with minimum required parameters')
-def given_i_already_have_a_book_with_minimum_required_parameters(context):
-    given_i_have_a_correct_book_payload_with_the_minimum_of_required_parameters(context)
+@given('I already have a book added only with the required parameters')
+def given_i_already_have_a_book_only_with_the_required_parameters(context):
+    given_i_have_a_correct_book_payload_only_with_the_required_parameters(context)
     when_i_do_a_post_request_to_the_book_endpoint(context)
 
 
@@ -75,8 +72,8 @@ def then_i_receive_an_error_that_the_book_with_that_name_already_exists(context)
 def then_the_response_will_contain_the_new_book_with_the_related_id(context):
     book = context.response.json()
     request = context.request_body
-    assert_that(book)\
-        .has_name(request['name'])\
-        .has_author(request['author'])\
-        .has_description(None)\
+    assert_that(book) \
+        .has_name(request['name']) \
+        .has_author(request['author']) \
+        .has_description(None) \
         .has_cover(None)

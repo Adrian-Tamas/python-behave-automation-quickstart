@@ -1,10 +1,8 @@
 import json
-import logging
 import requests
 
+from actions.api import logger
 from configuration.configuration import users_url
-
-logger = logging.getLogger('default')
 
 
 # POST

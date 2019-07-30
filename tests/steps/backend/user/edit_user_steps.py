@@ -1,11 +1,8 @@
 from assertpy import assert_that
 from behave import given, when, then
-from faker import Faker
 
 from actions.api.user_endpoint_actions import do_put_request_to_update_user
-from configuration.configuration import local
-
-fake = Faker(local)
+from tests.steps import fake
 
 
 # GIVENs
@@ -35,10 +32,10 @@ def then_the_response_is_with_success_and_the_updated_user_details_are_displayed
     user = context.response.json()
     request = context.request_body
     assert_that(context.response.status_code).is_equal_to(200)
-    assert_that(user)\
-        .has_id(context.user_id)\
-        .has_first_name(request['first_name'])\
-        .has_last_name(request['last_name'])\
+    assert_that(user) \
+        .has_id(context.user_id) \
+        .has_first_name(request['first_name']) \
+        .has_last_name(request['last_name']) \
         .has_email(request['email'])
 
 

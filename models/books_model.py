@@ -1,9 +1,6 @@
 from collections import namedtuple
-from faker import Faker
 
-from configuration.configuration import local
-
-fake = Faker(local)
+from models import fake
 
 
 def _setup_create_book():

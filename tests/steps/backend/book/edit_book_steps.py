@@ -1,11 +1,8 @@
 from assertpy import assert_that
 from behave import given, when, then
-from faker import Faker
 
 from actions.api.book_endpoint_actions import do_put_request_to_update_book
-from configuration.configuration import local
-
-fake = Faker(local)
+from tests.steps import fake
 
 
 # GIVENs
@@ -35,8 +32,8 @@ def then_the_response_is_with_success_and_the_updated_book_details_are_displayed
     book = context.response.json()
     request = context.request_body
     assert_that(context.response.status_code).is_equal_to(200)
-    assert_that(book)\
-        .has_name(request['name'])\
-        .has_author(request['author'])\
-        .has_description(None)\
+    assert_that(book) \
+        .has_name(request['name']) \
+        .has_author(request['author']) \
+        .has_description(None) \
         .has_cover(None)
