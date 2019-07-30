@@ -15,4 +15,7 @@ class DevConfiguration:
         self.local = self.configuration[self.ENV_NAME]["local"]
 
     def read_configuration(self):
-        pass
+        self.books_url = f'{self.backend_url}/books'
+        self.users_url = f'{self.backend_url}/users'
+        self.reservations_url = f'{self.backend_url}/reservations'
+

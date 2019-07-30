@@ -41,3 +41,7 @@ frontend_url = configuration.frontend_url
 rp_endpoint = configuration.rp_endpoint
 rp_project = configuration.rp_project
 max_timeout = configuration.max_timeout
+
+books_url = configuration.books_url
+users_url = configuration.users_url
+reservations_url = configuration.reservations_url
