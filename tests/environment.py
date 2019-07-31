@@ -1,11 +1,17 @@
+import assertpy
+import logging
 import os
 
 from elementium.drivers.se import SeElements
+import assertpy
 from reportportal_behave.behave_integration_service import BehaveIntegrationService
 
+from actions.api.book_endpoint_actions import do_delete_request_for_book
+from actions.api.user_endpoint_actions import do_delete_request_for_user
 from configuration.configuration import rp_endpoint, rp_project
-
 from helpers.driver_helper import get_driver
+
+logger = logging.getLogger('default')
 
 
 def before_all(context):
@@ -25,6 +31,8 @@ def before_all(context):
                                                                   step_based=step_based,
                                                                   add_screenshot=add_screenshot)
     context.behave_integration_service.launch_service(context.config.tags.ands[0])
+    context.book_ids = []
+    context.user_ids = []
 
 
 def before_feature(context, feature):
@@ -63,3 +71,20 @@ def after_all(context):
     except AttributeError:
         pass
 
+    all_book_ids_deleted = True
+    all_user_ids_deleted = True
+
+    for book_id in context.book_ids:
+        response = do_delete_request_for_book(book_id)
+        if not response.ok:
+            all_book_ids_deleted = False
+            logger.debug('Not all books were deleted')
+
+    for user_id in context.user_ids:
+        response = do_delete_request_for_user(user_id)
+        if not response.ok:
+            all_user_ids_deleted = False
+            logger.debug("Not all users were deleted")
+
+    assertpy.assert_that(all_book_ids_deleted).described_as("Not all books were deleted").is_true()
+    assertpy.assert_that(all_user_ids_deleted).described_as("Not all users were deleted").is_true()

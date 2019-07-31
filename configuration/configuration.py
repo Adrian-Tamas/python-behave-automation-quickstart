@@ -1,4 +1,3 @@
-# Load configuration file based on the selected platform
 import importlib
 import json
 import logging.config
@@ -7,6 +6,7 @@ import os
 env = os.environ.get("env", "dev")
 
 supported_envs = ["dev", "test"]
+
 
 def __init_logging():
     path = 'logging.json'
@@ -19,7 +19,6 @@ def __init_logging():
 
 
 __init_logging()
-
 
 if env not in supported_envs:
     raise EnvironmentError("Unsupported environment: " + env)
@@ -36,8 +35,13 @@ configuration = getattr(module, class_attr)()
 
 configuration.read_configuration()
 
+local = configuration.local
 backend_url = configuration.backend_url
 frontend_url = configuration.frontend_url
 rp_endpoint = configuration.rp_endpoint
 rp_project = configuration.rp_project
 max_timeout = configuration.max_timeout
+
+books_url = configuration.books_url
+users_url = configuration.users_url
+reservations_url = configuration.reservations_url
