@@ -2,7 +2,7 @@
 This is a quick-start for python and behave automation framework. It has everything setup to just start writing tests
 
 # About the framework
-* it is currently setup for Rest Api testing and UI testing will be integrated later
+* it is currently setup for Rest Api and UI testing
 * it is configured to run on a couple of different environments controlled through the config.ini files but adding a new one is very simple:
     * add a new config file and name it as you want while setting up all the values from an existing one specific for this new env
     * add a new env config file in the /configuration folder keeping the naming convention \<env\>_configuration.py

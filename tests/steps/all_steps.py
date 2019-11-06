@@ -2,22 +2,23 @@
 
 # BACKEND
 # Users
-from tests.steps.backend.user.create_user_steps import *
-from tests.steps.backend.user.delete_user_steps import *
-from tests.steps.backend.user.edit_user_steps import *
-from tests.steps.backend.user.get_users_steps import *
+from tests.steps.user.backend.create_user_steps import *
+from tests.steps.user.backend.delete_user_steps import *
+from tests.steps.user.backend.edit_user_steps import *
+from tests.steps.user.backend.get_users_steps import *
 
 # Books
-from tests.steps.backend.book.create_book_steps import *
-from tests.steps.backend.book.delete_book_steps import *
-from tests.steps.backend.book.edit_book_steps import *
-from tests.steps.backend.book.get_books_steps import *
+from tests.steps.book.backend.create_book_steps import *
+from tests.steps.book.backend.delete_book_steps import *
+from tests.steps.book.backend.edit_book_steps import *
+from tests.steps.book.backend.get_books_steps import *
 
 # Reservations
-from tests.steps.backend.reservation.create_reservation_steps import *
-from tests.steps.backend.reservation.delete_reservation_steps import *
-from tests.steps.backend.reservation.edit_reservation_steps import *
-from tests.steps.backend.reservation.get_reservations_steps import *
+from tests.steps.reservation.backend.create_reservation_steps import *
+from tests.steps.reservation.backend.delete_reservation_steps import *
+from tests.steps.reservation.backend.edit_reservation_steps import *
+from tests.steps.reservation.backend.get_reservations_steps import *
 
 # UI
-from tests.steps.books.ui.books_steps import *
+# Books
+from tests.steps.book.ui.books_steps import *

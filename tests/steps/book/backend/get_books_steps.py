@@ -4,7 +4,7 @@ from assertpy import assert_that
 from behave import given, when, then
 
 from actions.api.book_endpoint_actions import do_get_request_for_all_books, do_get_request_for_book
-from tests.steps.backend.book.create_book_steps import (
+from tests.steps.book import (
     given_i_have_a_correct_book_payload_only_with_the_required_parameters,
     when_i_do_a_post_request_to_the_book_endpoint)
 

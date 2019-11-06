@@ -5,7 +5,7 @@ from behave import given, when, then
 
 from actions.api.reservation_endpoint_actions import (do_delete_reservation_by_book_id_or_user_id,
                                                       do_delete_reservation_by_book_id_and_user_id)
-from tests.steps.backend.user.get_users_steps import given_i_add_a_new_user
+from tests.steps.user.backend import given_i_add_a_new_user
 
 
 # GIVENs

@@ -3,8 +3,8 @@ from behave import given, when, then, step
 
 from actions.api.reservation_endpoint_actions import do_post_request_to_create_reservation
 from models.reservations_model import get_valid_create_reservation_payload
-from tests.steps.backend.book.create_book_steps import given_i_already_have_a_book_only_with_the_required_parameters
-from tests.steps.backend.user.get_users_steps import given_i_add_a_new_user
+from tests.steps.book import given_i_already_have_a_book_only_with_the_required_parameters
+from tests.steps.user.backend import given_i_add_a_new_user
 
 
 # GIVENs
