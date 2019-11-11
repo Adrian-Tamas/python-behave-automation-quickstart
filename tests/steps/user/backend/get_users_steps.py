@@ -4,8 +4,8 @@ from assertpy import assert_that
 from behave import given, when, then
 
 from actions.api.user_endpoint_actions import do_get_request_for_all_users, do_get_request_for_user
-from tests.steps.user.backend import (given_i_have_a_correct_user_payload,
-                                      when_i_do_a_post_request_to_the_user_endpoint)
+from tests.steps.user.backend.create_user_steps import (given_i_have_a_correct_user_payload,
+                                                        when_i_do_a_post_request_to_the_user_endpoint)
 
 
 # GIVENs
