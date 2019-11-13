@@ -1,6 +1,10 @@
 # Description
 This is a quick-start for python and behave automation framework. It has everything setup to just start writing tests
 
+# How to use it
+* if you just need a skeleton framework to start writing tests or learning automation create a branch from master and start using the framework
+* if you want to see a demo of how tests can be written and how the framework works change to the demoLibraryAppTesting branch
+
 # About the framework
 * it is currently setup for Rest Api testing and UI testing
 * it is configured to run on a couple of different environments controlled through the config.ini files but adding a new one is very simple:
