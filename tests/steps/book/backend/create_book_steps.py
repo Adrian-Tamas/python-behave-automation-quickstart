@@ -64,7 +64,7 @@ def when_i_try_to_add_another_book_with_the_same_details(context):
 @then('I receive an error that the book with that name already exists')
 def then_i_receive_an_error_that_the_book_with_that_name_already_exists(context):
     assert_that(context.response.status_code).is_equal_to(400)
-    assert_that(context.response.json()).is_equal_to(f"Book with name: {context.request_body['name']} writen by author:"
+    assert_that(context.response.json()).is_equal_to(f"Book with name: {context.request_body['name']} written by author:"
                                                      f" {context.request_body['author']} already exists")
 
 

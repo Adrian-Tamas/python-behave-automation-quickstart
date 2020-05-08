@@ -52,8 +52,8 @@ def then_i_deleted_successfully_the_reservation(context):
 @then('I successfully deleted reservation for user')
 def then_i_successfully_deleted_reservation_for_user(context):
     assert_that(context.response.status_code).is_equal_to(200)
-    assert_that(context.response.json()).is_equal_to(f'Deleted 1 of reservations for '
-                                                     f'{context.entity}s {context.id}')
+    assert_that(context.response.json()).is_equal_to(f'Deleted 1 reservations for '
+                                                     f'{context.entity} {context.id}')
 
 
 @then("I get an error that the reservation wasn't found")

@@ -10,7 +10,7 @@ Feature: Delete books
     When I do a DELETE request to the book endpoint
     Then I deleted successfully the book from books list
 
-  Scenario: I cannot delete an user using an invalid user_id
+  Scenario: I cannot delete a user using an invalid user_id
     Given I have an user_id for an user that doesn't exist
     When I do a DELETE request to the user endpoint with that ID
     Then I receive an error that the user was not found

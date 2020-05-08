@@ -9,6 +9,7 @@ Feature: Delete reservation
     When I do a delete request for reservation using book id
     Then I successfully deleted the reservation
 
+    @fail
   Scenario: I can delete a reservation using the user_id
     Given I already have at least one reservation
     When I do a delete request for reservation using user id

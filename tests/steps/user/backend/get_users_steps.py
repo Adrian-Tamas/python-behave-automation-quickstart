@@ -82,5 +82,5 @@ def then_the_related_user_payload_is_successfully_displayed(context):
 @then('I receive an error that the user was not found')
 def then_i_receive_an_error_that_the_user_was_not_found(context):
     assert_that(context.response.status_code).is_equal_to(400)
-    assert_that(context.response.json()).is_equal_to(f'User with user_id = {context.not_existing_user_id} '
+    assert_that(context.response.json()).is_equal_to(f'User with id = {context.not_existing_user_id} '
                                                      f'was not found')
