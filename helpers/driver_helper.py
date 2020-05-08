@@ -1,15 +1,10 @@
-import os
-from tokenize import String
-
 import sys
 
+from pygeckodriver import geckodriver_path
+from pychromedriver import chromedriver_path
+from tokenize import String
 from selenium import webdriver
 from selenium.webdriver import DesiredCapabilities
-
-
-def get_root_dir():
-    """ Getting the root dir of the project"""
-    return os.getcwd()
 
 
 def get_driver(browser: String):
@@ -22,7 +17,6 @@ def get_driver(browser: String):
 
 
 def chrome_driver():
-    driver_path = os.path.join(get_root_dir(), 'static_resources', 'drivers', 'windows', 'chromedriver.exe')
     caps = DesiredCapabilities.CHROME
     caps['acceptSslCerts'] = True
     options = webdriver.ChromeOptions()
@@ -31,12 +25,10 @@ def chrome_driver():
     options.assume_untrusted_cert_issuer = True
     return webdriver.Chrome(options=options,
                             desired_capabilities=caps,
-                            executable_path=driver_path)
+                            executable_path=chromedriver_path)
 
 
-def firefox32_driver():
-    # TODO: make this work with 32 bit
-    driver_path = os.path.join(get_root_dir(), 'static_resources', 'drivers', 'windows', 'geckodriver_win32.exe')
+def firefox_driver():
     caps = DesiredCapabilities.FIREFOX
     caps["marionette"] = True
     caps['acceptSslCerts'] = True
@@ -46,18 +38,4 @@ def firefox32_driver():
     profile.set_preference('app.update.enabled', False)
     return webdriver.Firefox(profile,
                              capabilities=caps,
-                             executable_path=driver_path)
-
-
-def firefox64_driver():
-    driver_path = os.path.join(get_root_dir(), 'static_resources', 'drivers', 'windows', 'geckodriver_win64.exe')
-    caps = DesiredCapabilities.FIREFOX
-    caps["marionette"] = True
-    caps['acceptSslCerts'] = True
-
-    profile = webdriver.FirefoxProfile()
-    profile.set_preference('app.update.auto', False)
-    profile.set_preference('app.update.enabled', False)
-    return webdriver.Firefox(profile,
-                             capabilities=caps,
-                             executable_path=driver_path)
+                             executable_path=geckodriver_path)

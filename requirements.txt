@@ -1,6 +1,9 @@
-requests==2.22.0
+assertpy==1.0
 behave==1.2.6
-assertpy==0.14
-reportportal-behave-client==1.0.1
-elementium==2.0.0
+elementium==2.0.2
+faker==4.0.3
+pychromedriver==81.0
+pygeckodriver==0.26.0
+reportportal-behave-client==1.0.3
+requests==2.23.0
 selenium==3.141.0
