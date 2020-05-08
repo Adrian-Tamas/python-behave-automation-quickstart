@@ -15,7 +15,7 @@ Feature: Create books
     When I do a POST request to the book endpoint
     Then the request will be successful with 200 response code
     And the response will contain the new object with the related ID
-@fail
+
   Scenario: I can add a new book using existing author, but different title
     Given I have a correct book payload only with the required parameters
     And I do a POST request to the book endpoint

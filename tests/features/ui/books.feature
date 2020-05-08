@@ -7,7 +7,6 @@ Feature: Books Page
     When I navigate to the books page
     Then I can see a list of available books
 
-  @test
   Scenario: I can add a Book
     Given I have details for a new book
     And I open the Add books page
