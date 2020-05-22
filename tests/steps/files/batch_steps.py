@@ -4,7 +4,7 @@ from behave import given, when, then
 import subprocess
 
 
-@given(u'I have a files file')
+@given(u'I have a batch file')
 def given_i_have_a_batch_file(context):
     context.file_path = "test.bat"
 

@@ -13,7 +13,7 @@ def given_i_get_all_books_info(context):
 
 @when(u'I save it to a csv')
 def when_i_save_to_csv(context):
-    with open("test.csv", "w") as f:
+    with open("test.csv", "w", newline='') as f:
         fieldnames = ['id', 'name', 'author', 'description', 'cover']
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()

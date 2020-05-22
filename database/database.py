@@ -31,7 +31,7 @@ def check_session():
 class SQLiteDatabaseConnection:
 
     def __init__(self):
-        self.engine = create_engine("sqlite:///C:\\work\\PythonLibraryBackend\\db.sqlite", echo=True)
+        self.engine = create_engine("sqlite:///C:\\work\\PythonLibraryBackend\\db.sqlite", echo=False)
         # engine = create_engine('postgres://user:%s@host/database' % urlquote('badpass'))
         # engine = create_engine(mysql://{}:{}@localhost:3306/test_db'.format(USR, PWD))
         self.session = None

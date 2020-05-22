@@ -1,4 +1,5 @@
 @ui
+@books_ui
 
 Feature: Books Page
 
