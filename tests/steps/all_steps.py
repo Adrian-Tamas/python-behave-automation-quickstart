@@ -22,3 +22,11 @@ from tests.steps.reservation.backend.get_reservations_steps import *
 # UI
 # Books
 from tests.steps.book.ui.books_steps import *
+
+
+#DB
+from tests.steps.db.db_steps import *
+
+#Batch
+from tests.steps.files.batch_steps import *
+from tests.steps.files.file_steps import *
