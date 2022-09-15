@@ -10,3 +10,5 @@
 .pytest_cache
 Pipfile**
 geckodriver.log
+venv
+reports
