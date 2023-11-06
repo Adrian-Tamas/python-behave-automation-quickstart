@@ -6,8 +6,6 @@ from selenium.webdriver.common.by import By
 class UsersPage(BasePage):
     table_row_locator = "//*[@class='clickable-row']"
     create_user_button_locator = "//*[contains(text(),'Create')]"
-    view_details_button_locator = "//*[contains(text(),'View Details')]"
-    save_success_message_locator = "//*[@class='alert alert-success']"
     user_first_name_column_locator = "//th[text()='User First Name']"
     user_last_name_column_locator = "//th[text()='User First Name']"
     user_email_column_locator = "//th[text()='User Email']"  # Common for users and reservations
