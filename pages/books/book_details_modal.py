@@ -1,5 +1,7 @@
 from configuration.configuration import max_timeout
-
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 class BookDetailsModal:
 
@@ -11,18 +13,27 @@ class BookDetailsModal:
     author_name_locator = "#book_author"
     book_description_locator = "#book_description"
 
-    def __init__(self, browser):
-        self.browser = browser
+    def __init__(self, driver):
+        self.driver = driver
         self.max_timeout = max_timeout
 
     def check_modal_is_displayed(self):
-        return self.browser.find(self.modal_locator, wait=True, ttl=self.max_timeout).is_displayed()
+        modal_element = WebDriverWait(self.driver, self.max_timeout).until(
+            EC.visibility_of_element_located((By.CSS_SELECTOR, self.modal_locator))
+        )
+        return modal_element.is_displayed()
 
     def check_modal_title(self):
-        return self.browser.find(self.title_locator, wait=True, ttl=self.max_timeout).text() == self.title
+        title_element = self.driver.find_element(By.CSS_SELECTOR, self.title_locator)
+        return title_element.text == self.title
 
     def check_book_details(self, book):
-        return (self.browser.find(self.cover_locator, wait=True, ttl=self.max_timeout).attribute("src") == book["cover"]
-                and self.browser.find(self.book_name_locator, wait=True, ttl=self.max_timeout).text() == book["name"]
-                and self.browser.find(self.author_name_locator, wait=True, ttl=self.max_timeout).text() == book["author"]
-                and self.browser.find(self.book_description_locator, wait=True, ttl=self.max_timeout).text() == book["description"])
+        cover_element = self.driver.find_element(By.CSS_SELECTOR, self.cover_locator)
+        book_name_element = self.driver.find_element(By.CSS_SELECTOR, self.book_name_locator)
+        author_name_element = self.driver.find_element(By.CSS_SELECTOR, self.author_name_locator)
+        book_description_element = self.driver.find_element(By.CSS_SELECTOR, self.book_description_locator)
+
+        return (cover_element.get_attribute("src") == book["cover"]
+                and book_name_element.text == book["name"]
+                and author_name_element.text == book["author"]
+                and book_description_element.text == book["description"])

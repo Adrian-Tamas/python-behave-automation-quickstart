@@ -1,13 +1,13 @@
 assertpy==1.1
 behave==1.2.6
-elementium==2.0.2
 faker==4.0.3
-pychromedriver==104.0
+pychromedriver==118.0
 pygeckodriver==0.31.0
 reportportal-behave-client==1.0.3
-requests==2.23.0
-selenium==3.141.0
+requests~=2.31.0
+selenium==4.14.0
 sqlalchemy==1.3.11
 mss==6.1.0
 allure-behave==2.10.0
 reportportal_client
+icecream==2.1.3

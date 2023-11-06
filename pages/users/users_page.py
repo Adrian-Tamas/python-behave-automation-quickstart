@@ -1,9 +1,52 @@
 from pages.base_page import BasePage
+from pages.users.user_details_modal import UserDetailsModal
+from selenium.webdriver.common.by import By
 
 
 class UsersPage(BasePage):
+    table_row_locator = "//*[@class='clickable-row']"
+    create_user_button_locator = "//*[contains(text(),'Create')]"
+    view_details_button_locator = "//*[contains(text(),'View Details')]"
+    save_success_message_locator = "//*[@class='alert alert-success']"
+    user_first_name_column_locator = "//th[text()='User First Name']"
+    user_last_name_column_locator = "//th[text()='User First Name']"
+    user_email_column_locator = "//th[text()='User Email']"  # Common for users and reservations
 
-    def __init__(self, browser):
-        super().__init__(browser)
+    user_column_titles = [user_first_name_column_locator, user_last_name_column_locator, user_email_column_locator]
+
+    def __init__(self, driver):
+        super().__init__(driver)
         self.url = super().url + "/users"
-        self.browser = browser
+
+    def check_users_displayed(self):
+        users = self.driver.find_elements(By.XPATH, self.table_row_locator)
+        return len(users) > 0
+
+    def open_create_users(self, next_page):
+        self.driver.find_element(By.XPATH, self.create_user_button_locator).click()
+        return next_page(self.driver)
+
+    def is_success_message_displayed(self, user_name):
+        success_msg = self.driver.find_element(By.XPATH, self.save_success_message_locator)
+        check_message = f"User with name {user_name} was created successfully" in success_msg.text
+        return check_message
+
+    def is_user_present_on_page(self, user):
+        users = self.driver.find_elements(By.XPATH, self.table_row_locator)
+        for row in users:
+            row_text = row.text
+            if user.get("first_name") in row_text and user.get("email") in row_text:
+                return True
+        return False
+
+    def is_text_present_in_all_rows(self, text):
+        users = self.driver.find_elements(By.XPATH, self.table_row_locator)
+        for row in users:
+            if row.text != "" and text not in row.text:
+                return False
+        return True
+
+    def open_user_details(self, user_id):
+        self.select_table_row(data_id=user_id)
+        self.driver.find_element(By.XPATH, self.view_details_button_locator).click()
+        return UserDetailsModal(self.driver)
