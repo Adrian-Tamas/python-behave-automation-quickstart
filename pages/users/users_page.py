@@ -17,20 +17,20 @@ class UsersPage(BasePage):
         self.url = super().url + "/users"
 
     def check_users_displayed(self):
-        users = self.driver.find_elements(By.XPATH, self.table_row_locator)
+        users = self.wait_presence_of_element_located(self.table_row_locator)
         return len(users) > 0
 
     def open_create_users(self, next_page):
-        self.driver.find_element(By.XPATH, self.create_user_button_locator).click()
+        self.wait_element_to_be_clickable(self.create_user_button_locator).click()
         return next_page(self.driver)
 
     def is_success_message_displayed(self, user_name):
-        success_msg = self.driver.find_element(By.XPATH, self.save_success_message_locator)
+        success_msg = self.wait_presence_of_element_located(self.save_success_message_locator)
         check_message = f"User with name {user_name} was created successfully" in success_msg.text
         return check_message
 
     def is_user_present_on_page(self, user):
-        users = self.driver.find_elements(By.XPATH, self.table_row_locator)
+        users = self.wait_presence_of_element_located(self.table_row_locator)
         for row in users:
             row_text = row.text
             if user.get("first_name") in row_text and user.get("email") in row_text:
@@ -38,7 +38,7 @@ class UsersPage(BasePage):
         return False
 
     def is_text_present_in_all_rows(self, text):
-        users = self.driver.find_elements(By.XPATH, self.table_row_locator)
+        users = self.wait_presence_of_element_located(self.table_row_locator)
         for row in users:
             if row.text != "" and text not in row.text:
                 return False
@@ -46,5 +46,5 @@ class UsersPage(BasePage):
 
     def open_user_details(self, user_id):
         self.select_table_row(data_id=user_id)
-        self.driver.find_element(By.XPATH, self.view_details_button_locator).click()
+        self.wait_element_to_be_clickable(self.view_details_button_locator).click()
         return UserDetailsModal(self.driver)

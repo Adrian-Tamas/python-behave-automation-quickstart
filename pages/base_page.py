@@ -1,5 +1,7 @@
 import logging
 
+from selenium.common import TimeoutException
+
 from configuration.configuration import frontend_url, max_timeout
 from abc import ABC
 from selenium.webdriver.common.by import By
@@ -41,20 +43,10 @@ class BasePage(ABC):
     tab_elements = (books_tab_locator, users_tab_locator, reservations_tab_locator)
     button_elements = (view_details_button_locator, create_button_locator, edit_button_locator, delete_button_locator)
 
-    def is_element_visible(self, locator, locator_type="XPATH"):
-        if locator_type == "XPATH":
-            locator_type = By.XPATH
-
-        elif locator_type == "CSS":
-            locator_type = By.CSS_SELECTOR
-        element = WebDriverWait(self.driver, self.max_timeout).until(EC.visibility_of_element_located
-                                                                     ((locator_type, locator)))
-        return element
-
     def is_page_title_displayed(self, page_title_locator):
         current_page_title = page_title_locator.split('=')[-1][:-1].strip()
         logging.info(f" Method called from: {ic.format().strip(' ic|')}\nIs {current_page_title} page title visible?")
-        page_title = self.is_element_visible(page_title_locator)
+        page_title = self.wait_presence_of_element_located(page_title_locator)
 
         if page_title:
             logging.info(f" Title {current_page_title} is visible")
@@ -66,7 +58,7 @@ class BasePage(ABC):
     def is_tab_displayed(self, tab_locator):
         current_tab = tab_locator.split('-')[-1][:-2].strip().capitalize()
         logging.info(f" Method called from: {ic.format().strip(' ic|')}\nIs '{current_tab}' tab visible?")
-        tab = self.is_element_visible(tab_locator)
+        tab = self.wait_presence_of_element_located(tab_locator)
 
         if tab:
             logging.info(f" Tab '{current_tab}' is visible")
@@ -78,7 +70,7 @@ class BasePage(ABC):
     def is_button_displayed(self, button_locator):
         current_button = button_locator.split(',')[-1][:-2].strip()
         logging.info(f" Method called from: {ic.format().strip(' ic|')}\nIs {current_button} button visible?")
-        button = self.is_element_visible(button_locator)
+        button = self.wait_presence_of_element_located(button_locator)
 
         if button:
             logging.info(f" Button {current_button} is visible")
@@ -90,7 +82,7 @@ class BasePage(ABC):
     def is_column_title_displayed(self, column_title_locator):
         current_column_title = column_title_locator.split('=')[-1][:-1].strip()
         logging.info(f" Method called from: {ic.format().strip(' ic|')}\nIs {current_column_title} column title visible?")
-        column = self.is_element_visible(column_title_locator)
+        column = self.wait_presence_of_element_located(column_title_locator)
 
         if column:
             logging.info(f" Column {current_column_title} is visible")
@@ -102,22 +94,54 @@ class BasePage(ABC):
     # ACTIONS
 
     def go_to_books_page(self, next_page):
-        self.driver.find_element(By.XPATH, self.books_tab_locator).click()
+        self.wait_presence_of_element_located(self.books_tab_locator).click()
         return next_page(self.driver)
 
     def go_to_users_page(self, next_page):
-        self.driver.find_element(By.XPATH, self.users_tab_locator).click()
+        self.wait_presence_of_element_located(self.users_tab_locator).click()
         return next_page(self.driver)
 
     def go_to_reservations_page(self, next_page):
-        self.driver.find_element(By.XPATH, self.reservations_tab_locator).click()
+        self.wait_presence_of_element_located(self.reservations_tab_locator).click()
         return next_page(self.driver)
 
     def filter_table(self, search_term):
-        input_element = self.driver.find_element(By.XPATH, self.search_field_locator)
+        input_element = self.wait_presence_of_element_located(self.search_field_locator)
         input_element.clear()
         input_element.send_keys(search_term)
         return self
 
     def select_table_row(self, data_id):
-        self.driver.find_element(By.XPATH, self.row_locator.format(data_id)).click()
+        self.wait_element_to_be_clickable(self.row_locator.format(data_id)).click()
+
+    def wait_presence_of_element_located(self, element, timeout=max_timeout):
+        try:
+            el = WebDriverWait(self.driver, timeout).until(
+                EC.presence_of_element_located((By.XPATH, element)))
+            return el
+        except TimeoutException:
+            logging.info("TimeoutException: Elements are not located")
+
+    def wait_presence_of_all_elements_located(self, element, timeout=max_timeout):
+        try:
+            el = WebDriverWait(self.driver, timeout).until(
+                EC.presence_of_all_elements_located((By.XPATH, element)))
+            return el
+        except TimeoutException:
+            logging.info("TimeoutException: Elements are not located")
+
+    def wait_element_to_be_clickable(self, element, timeout=max_timeout):
+        try:
+            el = WebDriverWait(self.driver, timeout).until(
+                EC.element_to_be_clickable((By.XPATH, element)))
+            return el
+        except TimeoutException:
+            logging.info("TimeoutException: Element is not clickable")
+
+    def wait_visibility_of_element_located(self, element, timeout=max_timeout):
+        try:
+            el = WebDriverWait(self.driver, timeout).until(
+                EC.visibility_of_element_located((By.XPATH, element)))
+            return el
+        except TimeoutException:
+            logging.log("TimeoutException: Element is not visible")
