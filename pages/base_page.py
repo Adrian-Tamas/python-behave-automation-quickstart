@@ -9,7 +9,6 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from icecream import ic
 
-
 class BasePage(ABC):
     logging.basicConfig(filename='info.log', encoding='utf-8', level=logging.INFO)
     url = frontend_url

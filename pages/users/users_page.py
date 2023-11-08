@@ -1,7 +1,5 @@
 from pages.base_page import BasePage
 from pages.users.user_details_modal import UserDetailsModal
-from selenium.webdriver.common.by import By
-
 
 class UsersPage(BasePage):
     table_row_locator = "//*[@class='clickable-row']"

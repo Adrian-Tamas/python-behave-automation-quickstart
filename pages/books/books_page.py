@@ -1,9 +1,7 @@
 from pages.base_page import BasePage
 from pages.books.book_details_modal import BookDetailsModal
-from selenium.webdriver.common.by import By
 
 class BooksPage(BasePage):
-
     table_row_locator = "//*[@class='clickable-row']"
     create_book_button_locator = "//*[contains(text(),'Create')]"
 
