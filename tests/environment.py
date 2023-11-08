@@ -2,7 +2,6 @@ import assertpy
 import logging
 import os
 
-from elementium.drivers.se import SeElements
 from reportportal_behave.behave_integration_service import BehaveIntegrationService
 
 from actions.api.book_endpoint_actions import do_delete_request_for_book
@@ -41,7 +40,7 @@ def before_feature(context, feature):
     if 'ui' in feature.tags:
         context.driver = get_driver(context.requested_browser)
         context.timeout = 10
-        context.browser = SeElements(context.driver)
+        context.browser = context.driver
 
 
 def before_scenario(context, scenario):
