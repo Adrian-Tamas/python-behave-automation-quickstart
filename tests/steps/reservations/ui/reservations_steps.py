@@ -53,7 +53,6 @@ def then_reservations_are_filtered(context, search_term):
 
 @then(u"{buttons} are not clickable")
 def then_edit_and_delete_buttons_are_not_clickable(context, buttons):
-    print(f"*****__In Then______{buttons}___*******************")
     assert_that(context.reservations_page.is_button_enabled(buttons)).is_equal_to(False)
 
 

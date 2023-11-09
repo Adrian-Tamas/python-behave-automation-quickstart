@@ -56,7 +56,6 @@ class ReservationsPage(BasePage):
     def is_text_present_in_all_rows(self, text):
         reservations = self.wait_presence_of_all_elements_located(self.table_row_locator)
         for row in reservations:
-            # print(f"********len: {len(row.text)}*******for {row.text}  ***********")
             if len(reservations[0].text) == 0 or len(row.text) != 0 and text not in row.text:
                 return False
         return True
