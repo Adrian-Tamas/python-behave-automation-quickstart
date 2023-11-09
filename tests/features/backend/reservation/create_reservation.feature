@@ -14,6 +14,6 @@ Feature: Create reservations
   Scenario: I cannot create more than one reservation with the same details
     Given I already have an user and a book
     And I have a valid payload to create a reservation
-    And I do a POST request to the reservation endpoint
+    When I do a POST request to the reservation endpoint
     When I try to create another reservation with the same details
     Then I get an error that the reservation already exists

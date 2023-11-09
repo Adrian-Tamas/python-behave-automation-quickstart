@@ -5,7 +5,7 @@
 Feature: Delete reservation
 
   Scenario: I can delete a reservation using the book_id
-    Given I already have at least one reservation
+    Given I have at least one reservation
     When I do a delete request for reservation using book id
     Then I successfully deleted the reservation
 
