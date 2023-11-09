@@ -113,7 +113,7 @@ class BasePage(ABC):
         return self
 
     def select_table_row(self, data_id):
-        self.wait_element_to_be_clickable(self.row_selector.format(data_id)).click()
+        self.wait_element_to_be_clickable(self.row_locator.format(data_id)).click()
 
     def wait_presence_of_element_located(self, element, timeout=max_timeout):
         try:

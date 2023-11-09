@@ -1,7 +1,7 @@
-from pages.base_page import BasePage
+from pages.books.books_page import BooksPage
 
 
-class CreateBookPage(BasePage):
+class CreateBookPage(BooksPage):
 
     name_field_locator = "//input[@id='name']"
     author_field_locator = "//input[@id='author']"
