@@ -1,6 +1,6 @@
 from pages.base_page import BasePage
 from pages.books.book_details_modal import BookDetailsModal
-from selenium.webdriver.common.by import By
+
 
 class BooksPage(BasePage):
 
@@ -36,6 +36,7 @@ class BooksPage(BasePage):
 
     def is_text_present_in_all_rows(self, text):
         books = self.wait_presence_of_all_elements_located(self.table_row_locator)
+
         for row in books:
             if row.text != "" and text not in row.text:
                 return False

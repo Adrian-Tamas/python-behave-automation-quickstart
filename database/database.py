@@ -32,10 +32,7 @@ def check_session():
 class SQLiteDatabaseConnection:
 
     def __init__(self):
-        # self.engine = create_engine("sqlite:///C:\\work\\PythonLibraryBackend\\db.sqlite", echo=False)
-        # self.engine = create_engine("sqlite:///C:\\Users\\vladimir.kocistubic\\OneDrive - ENDAVA\\Documents\\Python Accelerator\\Application\\pythonlibrarybackend\\db.sqlite", echo=False)
-        self.engine = create_engine(
-            f"sqlite:///{os.path.join(os.path.dirname(os.getcwd()), 'pythonlibrarybackend')}\\db.sqlite", echo=False)
+        self.engine = create_engine(f"sqlite:///{os.path.join(os.path.dirname(os.getcwd()), 'pythonlibrarybackend')}\\db.sqlite", echo=False)
         # engine = create_engine('postgres://user:%s@host/database' % urlquote('badpass'))
         # engine = create_engine(mysql://{}:{}@localhost:3306/test_db'.format(USR, PWD))
         self.session = None

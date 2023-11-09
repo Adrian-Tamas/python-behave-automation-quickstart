@@ -26,10 +26,12 @@ from tests.steps.book.ui.books_steps import *
 # Reservations
 from tests.steps.reservations.ui.reservations_steps import *
 
+# User
+from tests.steps.user.ui.users_steps import *
 
-#DB
+# DB
 from tests.steps.db.db_steps import *
 
-#Batch
+# Batch
 from tests.steps.files.batch_steps import *
 from tests.steps.files.file_steps import *
