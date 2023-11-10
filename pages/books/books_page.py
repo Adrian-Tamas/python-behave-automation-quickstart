@@ -6,8 +6,6 @@ class BooksPage(BasePage):
 
     table_row_locator = "//tr[@class='clickable-row']"
     create_book_button_locator = "//a[@id='create']"
-    view_details_button_locator = "//button[@id='viewDetails']"
-    save_success_message_locator = "//div[@class='alert alert-success']"
 
     def __init__(self, driver):
         super().__init__(driver)

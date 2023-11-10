@@ -32,5 +32,5 @@ class CreateBookPage(BooksPage):
 
     def click_save_book_button(self, next_page):
         self.wait_element_to_be_clickable(self.save_button_locator).click()
-        return self
+        return next_page(self.driver)
 

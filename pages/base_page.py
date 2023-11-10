@@ -1,7 +1,4 @@
 import logging
-
-from selenium.common import TimeoutException
-
 from configuration.configuration import frontend_url, max_timeout
 from abc import ABC
 from selenium.webdriver.common.by import By
@@ -14,10 +11,6 @@ from icecream import ic
 class BasePage(ABC):
     logging.basicConfig(filename='info.log', encoding='utf-8', level=logging.INFO)
     url = frontend_url
-    # books_button_identifier = "#v-pills-books"
-    # users_button_identifier = "#v-pills-users"
-    # reservations_button_identifier = "#v-pills-reservations"
-    # search_field_identifier = "#searchField"
     row_locator = "//*[@id='{0}']/th"
 
     # Tab locators
@@ -95,15 +88,15 @@ class BasePage(ABC):
     # ACTIONS
 
     def go_to_books_page(self, next_page):
-        self.wait_element_to_be_clickable(self.books_button_identifier).click()
+        self.wait_element_to_be_clickable(self.books_tab_locator).click()
         return next_page(self.driver)
 
     def go_to_users_page(self, next_page):
-        self.wait_element_to_be_clickable(self.users_button_identifier).click()
+        self.wait_element_to_be_clickable(self.users_tab_locator).click()
         return next_page(self.driver)
 
     def go_to_reservations_page(self, next_page):
-        self.wait_element_to_be_clickable(self.reservations_button_identifier).click()
+        self.wait_element_to_be_clickable(self.reservations_tab_locator).click()
         return next_page(self.driver)
 
     def filter_table(self, search_term):
