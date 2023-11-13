@@ -26,5 +26,11 @@ def firefox_driver():
     return webdriver.Firefox(options=firefox_options)
 
 
+def edge_driver():
+    edge_options = webdriver.EdgeOptions()
+    edge_options.add_argument("--start-maximized")
+    return webdriver.Edge(options=edge_options)
+
+
 
 

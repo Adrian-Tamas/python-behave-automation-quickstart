@@ -4,6 +4,7 @@ from pages.base_page import BasePage
 class ReservationsPage(BasePage):
 
     table_row_locator = "//tr[@class='clickable-reservation-row']"
+    first_row_locator = "//tr/th[@scope='row'][text()='1']"
     reservations_btn = "//a[@id='v-pills-reservations']"
     edit_btn = "//button[@id='edit-reservation']"
     delete_btn = "//button[@id='delete-reservation']"
@@ -41,8 +42,7 @@ class ReservationsPage(BasePage):
         self.wait_element_to_be_clickable(self.reservations_btn).click()
 
     def click_on_first_reservations_row(self):
-        reservations = self.wait_presence_of_all_elements_located(self.table_row_locator)
-        reservations[0].click()
+        self.wait_element_to_be_clickable(self.first_row_locator).click()
 
     def click_on_cancel_deleting(self):
         self.wait_element_to_be_clickable(self.cancel_deleting).click()
