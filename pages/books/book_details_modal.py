@@ -1,16 +1,17 @@
 from configuration.configuration import max_timeout
+from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 
 
 class BookDetailsModal(BasePage):
 
     title = "Book Details"
-    modal_locator = "//div[@id='viewBookDetails']"
-    title_locator = "//h5[@id='itemLabel']"
-    cover_locator = "//img[@id='preview']"
-    book_name_locator = "//h3[@id='book_name']"
-    author_name_locator = "//h5[@id='book_author']"
-    book_description_locator = "//span[@id='book_description']"
+    modal_locator = (By.CSS_SELECTOR, "#viewBookDetails")
+    title_locator = (By.CSS_SELECTOR, "#itemLabel")
+    cover_locator = (By.CSS_SELECTOR, "#preview")
+    book_name_locator = (By.CSS_SELECTOR, "#book_name")
+    author_name_locator = (By.CSS_SELECTOR, "#book_author")
+    book_description_locator = (By.CSS_SELECTOR, "#book_description")
 
     def __init__(self, driver):
         super().__init__(driver)

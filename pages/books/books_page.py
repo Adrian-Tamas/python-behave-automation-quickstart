@@ -1,11 +1,14 @@
 from pages.base_page import BasePage
 from pages.books.book_details_modal import BookDetailsModal
+from selenium.webdriver.common.by import By
 
 
 class BooksPage(BasePage):
 
-    table_row_locator = "//tr[@class='clickable-row']"
-    create_book_button_locator = "//a[@id='create']"
+    table_row_locator = (By.CSS_SELECTOR, ".clickable-row")
+    create_book_button_locator = (By.CSS_SELECTOR, "#create")
+    view_details_button_locator = (By.CSS_SELECTOR, "#viewDetails")
+    save_success_message_locator = (By.CSS_SELECTOR, ".alert-success")
 
     def __init__(self, driver):
         super().__init__(driver)

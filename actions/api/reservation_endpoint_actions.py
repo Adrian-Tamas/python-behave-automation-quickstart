@@ -8,7 +8,7 @@ from configuration.configuration import reservations_url
 # POST
 def do_post_request_to_create_reservation(reservation):
     """
-    Do a post request to create a reservations
+    Do a post request to create a reservation
     :param reservation: the details of the new reservations
     :return: the full response object
     """
@@ -36,7 +36,7 @@ def do_get_request_for_all_reservations():
 
 def do_get_reservation_by_entity_id(**kwargs):
     """
-    Do a get request to obtain reservations using book_id OR user_id
+    Do a get request to obtain reservation using book_id OR user_id
     **kwargs: receive user_id or book_id as parameter
     :return: the reservations details
     """
@@ -55,7 +55,7 @@ def do_get_reservation_by_entity_id(**kwargs):
 
 def do_get_reservation_by_book_id_and_user_id(user_id, book_id):
     """
-    Do a get request to obtain reservations using book_id AND user_id
+    Do a get request to obtain reservation using book_id AND user_id
     :param user_id: ID of the user
     :param book_id: ID of the book
     :return: the reservations details
@@ -71,7 +71,7 @@ def do_get_reservation_by_book_id_and_user_id(user_id, book_id):
 # DELETE
 def do_delete_reservation_by_book_id_or_user_id(**kwargs):
     """
-    Do a delete request to remove reservations using book_id OR user_id
+    Do a delete request to remove reservation using book_id OR user_id
     **kwargs: receive user_id or book_id as parameter
     :return: the message after reservations is deleted
     """
@@ -90,7 +90,7 @@ def do_delete_reservation_by_book_id_or_user_id(**kwargs):
 
 def do_delete_reservation_by_book_id_and_user_id(user_id, book_id):
     """
-    Do a delete request to remove reservations using book_id AND user_id
+    Do a delete request to remove reservation using book_id AND user_id
     :param user_id: ID of the user
     :param book_id: ID of the book
     :return: the message after reservations is deleted

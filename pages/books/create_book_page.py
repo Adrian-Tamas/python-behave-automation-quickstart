@@ -1,13 +1,14 @@
-from pages.books.books_page import BooksPage
+from pages.base_page import BasePage
+from selenium.webdriver.common.by import By
 
 
-class CreateBookPage(BooksPage):
+class CreateBookPage(BasePage):
 
-    name_field_locator = "//input[@id='name']"
-    author_field_locator = "//input[@id='author']"
-    description_field_locator = "//textarea[@id='description']"
-    cover_field_locator = "//input[@id='cover']"
-    save_button_locator = "//input[@id='save']"
+    name_field_locator = (By.CSS_SELECTOR, "#name")
+    author_field_locator = (By.CSS_SELECTOR, "#author")
+    description_field_locator = (By.CSS_SELECTOR, "#description")
+    cover_field_locator = (By.CSS_SELECTOR, "#cover")
+    save_button_locator = (By.CSS_SELECTOR, "#save")
 
     def __init__(self, driver):
         super().__init__(driver)

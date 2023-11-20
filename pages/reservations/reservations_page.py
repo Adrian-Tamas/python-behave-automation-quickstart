@@ -1,25 +1,24 @@
 from pages.base_page import BasePage
+from selenium.webdriver.common.by import By
 
 
 class ReservationsPage(BasePage):
 
-    table_row_locator = "//tr[@class='clickable-reservation-row']"
-    first_row_locator = "//tr/th[@scope='row'][text()='1']"
-    reservations_btn = "//a[@id='v-pills-reservations']"
-    edit_btn = "//button[@id='edit-reservation']"
-    delete_btn = "//button[@id='delete-reservation']"
-    create_btn = "//a[@id='create-reservation']"
-    delete_title = "//h5[@id='deleteReservationModalTitle']"
-    edit_title = "//h1[text()='Edit Reservation']"
-    create_title = "//h1[text()='Create Reservation']"
-    cancel_deleting = "//button[text()='Cancel']"
-    cancel_edit = "//input[@value='Edit reservation']/following-sibling::*[1]"
-    cancel_create = "//input[@value='Save reservation']/following-sibling::*[1]"
-    reservations_title_locator = "//h1[text()='Reservations']"
-    reservation_date_column_locator = "//th[text()='Reservation Date']"
-    reservation_expiration_date_column_locator = "//th[text()='Reservation Expiration Date']"
-
-    reservation_column_titles = [reservation_date_column_locator, reservation_expiration_date_column_locator]
+    table_row_locator = (By.XPATH, "//tr[@class='clickable-reservation-row']")
+    first_row_locator = (By.XPATH, "//tr/th[@scope='row'][text()='1']")
+    reservations_btn = (By.CSS_SELECTOR, "#v-pills-reservations")
+    edit_btn = (By.CSS_SELECTOR, "#edit-reservation")
+    delete_btn = (By.CSS_SELECTOR, "#delete-reservation")
+    create_btn = (By.CSS_SELECTOR, "#create-reservation")
+    delete_title = (By.CSS_SELECTOR, "#deleteReservationModalTitle")
+    edit_title = (By.XPATH, "//h1[text()='Edit Reservation']")
+    create_title = (By.XPATH, "//h1[text()='Create Reservation']")
+    cancel_deleting = (By.CSS_SELECTOR, "#modalCancelReservationButton")
+    cancel_edit = (By.CSS_SELECTOR, "#back")
+    cancel_create = (By.CSS_SELECTOR, "#back")
+    reservations_title_locator = (By.CSS_SELECTOR, "//h1[text()='Reservations']")
+    reservation_date_column_locator = (By.XPATH, "//th[text()='Reservation Date']")
+    reservation_expiration_date_column_locator = (By.XPATH, "//th[text()='Reservation Expiration Date']")
 
     def __init__(self, driver):
         self.url = super().url + "/reservations"

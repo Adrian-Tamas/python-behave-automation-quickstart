@@ -1,14 +1,15 @@
 from pages.base_page import BasePage
 from pages.users.user_details_modal import UserDetailsModal
+from selenium.webdriver.common.by import By
+
 
 class UsersPage(BasePage):
-    table_row_locator = "//*[@class='clickable-row']"
-    create_user_button_locator = "//*[contains(text(),'Create')]"
-    user_first_name_column_locator = "//th[text()='User First Name']"
-    user_last_name_column_locator = "//th[text()='User First Name']"
-    user_email_column_locator = "//th[text()='User Email']"  # Common for users and reservations
 
-    user_column_titles = [user_first_name_column_locator, user_last_name_column_locator, user_email_column_locator]
+    table_row_locator = (By.CSS_SELECTOR, ".clickable-row")
+    create_user_button_locator = (By.CSS_SELECTOR, "#create")
+    user_first_name_column_locator = (By.XPATH, "//th[text()='User First Name']")
+    user_last_name_column_locator = (By.XPATH, "//th[text()='User Last Name']")
+    user_email_column_locator = (By.XPATH, "//th[text()='User Email']")  # Common for users and reservations
 
     def __init__(self, driver):
         super().__init__(driver)
