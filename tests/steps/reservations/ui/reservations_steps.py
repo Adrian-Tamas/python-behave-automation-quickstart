@@ -46,6 +46,11 @@ def then_i_can_see_a_list_of_all_reservations(context):
     assert_that(context.reservations_page.check_reservations_displayed()).is_equal_to(True)
 
 
+@then(u'Reservations title is displayed')
+def then_reservations_title_is_displayed(context):
+    assert_that(context.reservations_page.check_reservations_title_displayed()).is_equal_to(True)
+
+
 @then(u"all the reservations displayed will have {search_term} in the name")
 def then_reservations_are_filtered(context, search_term):
     assert_that(context.reservations_page.is_text_present_in_all_rows(search_term)).is_true()

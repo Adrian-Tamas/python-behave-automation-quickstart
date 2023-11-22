@@ -127,3 +127,11 @@ class BasePage(ABC):
         except TimeoutException:
             logging.log("TimeoutException: Element is not visible")
 
+    def wait_visibility_of_all_element_located(self, by_locator, timeout=max_timeout):
+        try:
+            el = WebDriverWait(self.driver, timeout).until(
+                EC.visibility_of_all_elements_located(by_locator))
+            return el
+        except TimeoutException:
+            logging.log("TimeoutException: Element is not visible")
+

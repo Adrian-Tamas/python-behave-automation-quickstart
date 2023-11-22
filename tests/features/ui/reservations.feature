@@ -8,6 +8,7 @@ Feature: Reservations Page
     Given I have at least 1 reservation
     When I navigate to the reservations page
     Then I can see a list of all reservations
+    And Reservations title is displayed
 
   Scenario Outline: Edit and Delete reservation buttons are not clickable
     Given I have at least 1 reservation

@@ -4,7 +4,8 @@ from selenium.webdriver.common.by import By
 
 class ReservationsPage(BasePage):
 
-    table_row_locator = (By.XPATH, "//tr[@class='clickable-reservation-row']")
+    title = "Reservations"
+    table_row_locator = (By.CSS_SELECTOR, ".clickable-reservation-row")
     first_row_locator = (By.XPATH, "//tr/th[@scope='row'][text()='1']")
     reservations_btn = (By.CSS_SELECTOR, "#v-pills-reservations")
     edit_btn = (By.CSS_SELECTOR, "#edit-reservation")
@@ -16,7 +17,7 @@ class ReservationsPage(BasePage):
     cancel_deleting = (By.CSS_SELECTOR, "#modalCancelReservationButton")
     cancel_edit = (By.CSS_SELECTOR, "#back")
     cancel_create = (By.CSS_SELECTOR, "#back")
-    reservations_title_locator = (By.CSS_SELECTOR, "//h1[text()='Reservations']")
+    reservations_title_locator = (By.XPATH, "//h1[text()='Reservations']")
     reservation_date_column_locator = (By.XPATH, "//th[text()='Reservation Date']")
     reservation_expiration_date_column_locator = (By.XPATH, "//th[text()='Reservation Expiration Date']")
 
@@ -25,8 +26,12 @@ class ReservationsPage(BasePage):
         super().__init__(driver)
 
     def check_reservations_displayed(self):
-        reservations = self.wait_presence_of_all_elements_located(self.table_row_locator)
+        reservations = self.wait_visibility_of_all_element_located(self.table_row_locator)
         return len(reservations) > 0
+
+    def check_reservations_title_displayed(self):
+        reservations_title = self.wait_visibility_of_element_located(self.reservations_title_locator)
+        return reservations_title.text == self.title
 
     def click_on_create_btn(self):
         self.wait_element_to_be_clickable(self.create_btn).click()
