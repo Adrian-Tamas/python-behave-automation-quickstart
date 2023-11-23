@@ -14,19 +14,24 @@ from tests.steps.book.backend.edit_book_steps import *
 from tests.steps.book.backend.get_books_steps import *
 
 # Reservations
-from tests.steps.reservation.backend.create_reservation_steps import *
-from tests.steps.reservation.backend.delete_reservation_steps import *
-from tests.steps.reservation.backend.edit_reservation_steps import *
-from tests.steps.reservation.backend.get_reservations_steps import *
+from tests.steps.reservations.backend.create_reservation_steps import *
+from tests.steps.reservations.backend.delete_reservation_steps import *
+from tests.steps.reservations.backend.edit_reservation_steps import *
+from tests.steps.reservations.backend.get_reservations_steps import *
 
 # UI
 # Books
 from tests.steps.book.ui.books_steps import *
 
+# Reservations
+from tests.steps.reservations.ui.reservations_steps import *
 
-#DB
+# User
+from tests.steps.user.ui.users_steps import *
+
+# DB
 from tests.steps.db.db_steps import *
 
-#Batch
+# Batch
 from tests.steps.files.batch_steps import *
 from tests.steps.files.file_steps import *

@@ -6,9 +6,16 @@ from behave import given, when, then
 from actions.api.reservation_endpoint_actions import (do_delete_reservation_by_book_id_or_user_id,
                                                       do_delete_reservation_by_book_id_and_user_id)
 from tests.steps.user.backend.get_users_steps import given_i_add_a_new_user
+from tests.steps.reservations.backend.\
+    get_reservations_steps import given_i_already_have_at_least_one_reservation
 
 
 # GIVENs
+@given(u'I have at least one reservation')
+def given_i_have_at_least_one_reservation(context):
+    given_i_already_have_at_least_one_reservation(context)
+
+
 @given('I already added a user')
 def given_i_already_added_a_user(context):
     given_i_add_a_new_user(context)
@@ -42,7 +49,7 @@ def when_i_do_a_delete_request_for_reservation_using_wrong_user_id(context):
     context.response = do_delete_reservation_by_book_id_and_user_id(user_id=context.user_id, book_id=context.book_id)
 
 
-# THENs
+# # THENs
 @then('I successfully deleted the reservation')
 def then_i_deleted_successfully_the_reservation(context):
     assert_that(context.response.status_code).is_equal_to(200)

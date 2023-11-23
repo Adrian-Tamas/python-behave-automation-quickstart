@@ -7,7 +7,7 @@ today = datetime.now()
 
 def _setup_create_reservation(user_id, book_id):
     """
-    Create payload to add reservation
+    Create payload to add reservations
     :param user_id: the id of the user
     :param book_id: the id of the book
     :return:

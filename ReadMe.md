@@ -3,7 +3,8 @@ This is a quick-start for python and behave automation framework. It has everyth
 
 # How to use it
 * if you just need a skeleton framework to start writing tests or learning automation create a branch from master and start using the framework
-* if you want to see a demo of how tests can be written and how the framework works change to the demoLibraryAppTesting branch
+* if you want to see a demo of how tests can be written and how the framework works change to the demoLibraryAppTesting branch and from command line run run_behave.py script to execute all tests
+or add tags (e.g. --tags=@ui) to execute specific test suite.
 
 # About the framework
 * it is currently setup for Rest Api testing, database testing and UI testing
@@ -19,7 +20,7 @@ This is a quick-start for python and behave automation framework. It has everyth
 # Libs used
 * for api testing the builtin _requests_ lib is used
 * to map the models it is recommended to use the _namedtuple_ data structure
-* for the UI testing the _Elementium_ lib has been integrated 
+* for the UI testing the _Selenium_ lib has been integrated 
 * for working with the database the _sqlalchemy_ lib has been added
 
 # Environment variables required
@@ -33,7 +34,7 @@ As with any command line option use -D<argument>=value to pass it to the executi
 
 |  argument name | default | variable description | possible values |
 |----------------|---------|----------------------|-----------------|
-|browser | chrome | the browser to use for UI tests | existing: chrome, firefox; any other you add |
+|browser | chrome | the browser to use for UI tests | existing: chrome, firefox, edge; any other you add |
 |rp_enabled | False | enable test output to ReportPortal|True or False |
 |step_based | True | enable step based reporting for ReportPortal. Scenario level reporting if False | True or False |
 |add_screenshot| False | capture screenshot and add it to the reporting for ReportPortal | True or False |

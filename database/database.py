@@ -6,6 +6,7 @@ from database import logger
 from database.models.database.books_db_model import BooksDBModel
 from database.models.database.reservations_db_model import ReservationsDBModel
 from database.models.database.users_db_model import UsersDBModel
+import os
 
 
 def check_session():
@@ -31,7 +32,7 @@ def check_session():
 class SQLiteDatabaseConnection:
 
     def __init__(self):
-        self.engine = create_engine("sqlite:///C:\\work\\PythonLibraryBackend\\db.sqlite", echo=False)
+        self.engine = create_engine(f"sqlite:///{os.path.join(os.path.dirname(os.getcwd()), 'pythonlibrarybackend')}\\db.sqlite", echo=False)
         # engine = create_engine('postgres://user:%s@host/database' % urlquote('badpass'))
         # engine = create_engine(mysql://{}:{}@localhost:3306/test_db'.format(USR, PWD))
         self.session = None

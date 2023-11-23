@@ -1,28 +1,37 @@
 from configuration.configuration import max_timeout
+from selenium.webdriver.common.by import By
+from pages.base_page import BasePage
 
 
-class BookDetailsModal:
+class BookDetailsModal(BasePage):
 
     title = "Book Details"
-    modal_locator = "#viewBookDetails"
-    title_locator = "#itemLabel"
-    cover_locator = "#preview"
-    book_name_locator = "#book_name"
-    author_name_locator = "#book_author"
-    book_description_locator = "#book_description"
+    modal_locator = (By.CSS_SELECTOR, "#viewBookDetails")
+    title_locator = (By.CSS_SELECTOR, "#itemLabel")
+    cover_locator = (By.CSS_SELECTOR, "#preview")
+    book_name_locator = (By.CSS_SELECTOR, "#book_name")
+    author_name_locator = (By.CSS_SELECTOR, "#book_author")
+    book_description_locator = (By.CSS_SELECTOR, "#book_description")
 
-    def __init__(self, browser):
-        self.browser = browser
+    def __init__(self, driver):
+        super().__init__(driver)
         self.max_timeout = max_timeout
 
     def check_modal_is_displayed(self):
-        return self.browser.find(self.modal_locator, wait=True, ttl=self.max_timeout).is_displayed()
+        modal_element = self.wait_visibility_of_element_located(self.modal_locator)
+        return modal_element.is_displayed()
 
     def check_modal_title(self):
-        return self.browser.find(self.title_locator, wait=True, ttl=self.max_timeout).text() == self.title
+        title_element = self.wait_visibility_of_element_located(self.title_locator)
+        return title_element.text == self.title
 
     def check_book_details(self, book):
-        return (self.browser.find(self.cover_locator, wait=True, ttl=self.max_timeout).attribute("src") == book["cover"]
-                and self.browser.find(self.book_name_locator, wait=True, ttl=self.max_timeout).text() == book["name"]
-                and self.browser.find(self.author_name_locator, wait=True, ttl=self.max_timeout).text() == book["author"]
-                and self.browser.find(self.book_description_locator, wait=True, ttl=self.max_timeout).text() == book["description"])
+        cover_element = self.wait_visibility_of_element_located(self.cover_locator)
+        book_name_element = self.wait_visibility_of_element_located(self.book_name_locator)
+        author_name_element = self.wait_visibility_of_element_located(self.author_name_locator)
+        book_description_element = self.wait_visibility_of_element_located(self.book_description_locator)
+
+        return (cover_element.get_attribute("src") == book["cover"]
+                and book_name_element.text == book["name"]
+                and author_name_element.text == book["author"]
+                and book_description_element.text == book["description"])

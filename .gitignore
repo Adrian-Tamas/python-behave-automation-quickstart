@@ -10,5 +10,8 @@
 .pytest_cache
 Pipfile**
 geckodriver.log
+/info.log
+/logs.log
+/db.sqlight
 reports
 venv

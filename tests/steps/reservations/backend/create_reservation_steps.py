@@ -24,7 +24,7 @@ def given_i_have_a_valid_payload_to_create_a_reservation(context):
 
 
 # WHENs
-@step('I do a POST request to the reservation endpoint')
+@when('I do a POST request to the reservation endpoint')
 def when_i_do_a_post_request_to_the_reservation_endpoint(context):
     context.response = do_post_request_to_create_reservation(context.request_body)
 
